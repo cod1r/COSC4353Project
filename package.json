@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cod1r/COSC4353Project/issues"
   },
-  "homepage": "https://github.com/cod1r/COSC4353Project#readme"
+  "homepage": "https://github.com/cod1r/COSC4353Project#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
