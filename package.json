@@ -1,0 +1,19 @@
+{
+  "name": "login_v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cod1r/COSC4353Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cod1r/COSC4353Project/issues"
+  },
+  "homepage": "https://github.com/cod1r/COSC4353Project#readme"
+}
