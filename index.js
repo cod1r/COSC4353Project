@@ -8,19 +8,31 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true })) 
 
 app.get('/', (req, res) => {
-})
+});
 
 app.post('/login', (req, res) => {
   if (req.body.email && req.body.pass) {
     res.redirect('/profile.html');
   }
-})
+});
 
 app.post('/register', (req, res) => {
   if (req.body.email && req.body.pass) {
     res.redirect('/profile.html');
   }
-})
+});
+
+app.post('/profileSubmit', (req, res) => {
+  if (
+    req.body.name && 
+    req.body.Address1 && 
+    req.body.City && 
+    req.body.State && 
+    req.body.Zipcode
+  ) {
+    res.redirect('/fuelQuoteForm.html');
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
