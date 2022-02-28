@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<title>Personal Profile</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+  	<style>
+    body {
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-135deg, #c850c0, #4158d0);
+    }
+
+    *
+	{
+      box-sizing: border-box;
+    }
+
+    .container {
+      height: 80%;
+      width: 100%;
+    }
+
+    .containerForm {
+      position: relative;
+      background-color: white;
+      font-family: 'Times New Roman', Times, serif;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 50%;
+      padding: 10px;
+      margin: 0;
+      min-width: 500px;
+      max-width: 700px;
+      min-height: fit-content;
+    }
+
+    .PersonalProfile {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+	  text-align: center;
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    input {
+      outline: solid black 2px;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      transition: outline-offset .2s linear;
+      width: 50%;
+    }
+
+    input:focus {
+      outline-offset: 3px;
+    }
+
+    label {
+      font-size: large;
+      font-weight: 600;
+      width: 100%;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px;
+      background: #57b846;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: background .4s;
+      width: 50%;
+    }
+    button:hover {
+      background: #333333;
+    }
+
+	::placeholder
+	{
+		color: #4158d0;
+	}
+
+	.force-opaque::placeholder
+	{
+		opacity: 1;
+	}
+
+    label > div {
+        margin: 5px;
+    }
+	
+	header
+	{
+		font-size: larger;
+		color: #c850c0;
+	}
+
+  </style>
+    <div class="containerForm">
+      <!-- 
+    	- Full Name (50 characters, required)
+		- Address 1 (100 characters, required)
+		- Address 2 (100 characters, optional)
+		- City (100 characters, required)
+		- State (Drop Down, selection required) DB will store 2 character state code
+		- Zipcode (9 characters, at least 5 character code required)
+      -->
+      <form class="PersonalProfile">
+		<header>
+			<b>Personal Profile Information</b> 
+		</header>
+        <label for="name" >
+        <div>Full Name</div> 
+		  <input type="text" name="name" placeholder="Full Name" class="force-opaque" maxlength="50" required/>
+        </label>
+        <label for="Address1">
+			<div>Address 1</div> 
+			<input type="text" name="Address1" placeholder="Address" class="force-opaque" maxlength="100" required/>
+        </label>
+		<label for="Address2">
+			<div>Address 2</div> 
+			<input type="text" name="Address2" placeholder=" Address(optional)" class="force-opaque" maxlength="100"/>
+        </label>
+		<label for="City">
+			<div>City</div>
+			<input type="text" name="City" placeholder="City" class="force-opaque" maxlength="100" required/>
+        </label>
+		<label for="State">
+			<div>State</div>
+			<select name="State" id="State" required>
+				<option value="" disabled selected>Select State</option>
+				<option value="AL">AL</option>
+				<option value="AK">AK</option>
+				<option value="AZ">AZ</option>
+				<option value="AR">AR</option>
+				<option value="CA">CA</option>
+				<option value="CO">CO</option>
+				<option value="CT">CT</option>
+				<option value="DE">DE</option>
+				<option value="FL">FL</option>
+				<option value="GA">GA</option>
+				<option value="HI">HI</option>
+				<option value="ID">ID</option>
+				<option value="IL">IL</option>
+				<option value="IN">IN</option>
+				<option value="IA">IA</option>
+				<option value="KS">KS</option>
+				<option value="KY">KY</option>
+				<option value="LA">LA</option>
+				<option value="ME">ME</option>
+				<option value="MD">MD</option>
+				<option value="MA">MA</option>
+				<option value="MI">MI</option>
+				<option value="MN">MN</option>
+				<option value="MS">MS</option>
+				<option value="MO">MO</option>
+				<option value="MT">MT</option>
+				<option value="NE">NE</option>
+				<option value="NV">NV</option>
+				<option value="NH">NH</option>
+				<option value="NJ">NJ</option>
+				<option value="NM">NM</option>
+				<option value="NY">NY</option>
+				<option value="NC">NC</option>
+				<option value="ND">ND</option>
+				<option value="OH">OH</option>
+				<option value="OK">OK</option>
+				<option value="OR">OR</option>
+				<option value="PA">PA</option>
+				<option value="RI">RI</option>
+				<option value="SC">SC</option>
+				<option value="SD">SD</option>
+				<option value="TN">TN</option>
+				<option value="TX">TX</option>
+				<option value="UT">UT</option>
+				<option value="VT">VT</option>
+				<option value="VA">VA</option>
+				<option value="WA">WA</option>
+				<option value="WV">WV</option>
+				<option value="WI">WI</option>
+				<option value="WY">WY</option>
+			</select>
+        </label>
+		<label for="Zipcode" style="margin-bottom: 20px;">
+			<div>Zipcode</div>
+			<input type="number" name="Zipcode" placeholder="Zipcode" class="force-opaque" minlength="5" maxlength="9" required/>
+        </label>
+        <button type="submit">SUBMIT</button>
+      </form>
+</body>
+</html>
