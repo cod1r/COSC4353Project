@@ -3,16 +3,9 @@ const app = express()
 const port = 3000
 
 app.use(express.static('public'))
+app.use(express.json())
 
 app.get('/', (req, res) => {
-})
-
-app.get('/login', (req, res) => {
-    res.sendFile(__dirname + "/login.html")
-})
-
-app.get('/register', (req, res) => {
-  res.sendFile(__dirname + "/register.html")
 })
 
 app.listen(port, () => {
