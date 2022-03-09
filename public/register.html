@@ -11,18 +11,11 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -36,7 +29,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="Username" placeholder="Username" minlength="5" maxlength="20">
+						<input class="input100" type="text" name="Username" placeholder="Username" minlength="5" maxlength="20" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -44,26 +37,43 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password" minlength="8">
+						<input class="input100" type="password" name="pass" placeholder="Password" minlength="8" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
+					</div>
+					<div>
+						<div>
+							Allowed Characters
+						</div>
+						<div>
+							<ul style="list-style-position: inside; font-size: small;">
+								<li>a through z</li>
+								<li>A through Z</li>
+								<li>0 through 9</li>
+								<li>Any of these symbols: !@#$%^&*()</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div>
+							Length Requirements
+						</div>
+						<ul style="list-style-position: inside;font-size: small;">
+							<li>
+								Username's length must be greater or equal to 5 and less than or equal to 20.
+							</li>
+							<li>
+								Password's length must be greater than or equal to 8.
+							</li>
+						</ul>
 					</div>
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Create
 						</button>
-					</div>
-
-					<div class="text-center p-t-12">
-						<span class="txt1">
-					
-						</span>
-						<!--<a class="txt2" href="#">
-							Username / Password?
-						</a>-->
 					</div>
 
 					<div class="text-center p-t-136">
@@ -76,26 +86,7 @@
 			</div>
 		</div>
 	</div>
-	
-	
-
-	
-<!--===============================================================================================-->	
-	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="/vendor/bootstrap/js/popper.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-<!--===============================================================================================-->
-	<script src="/js/main.js"></script>
-
 </body>
 </html>

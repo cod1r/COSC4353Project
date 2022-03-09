@@ -1,146 +1,146 @@
 <!DOCTYPE html>
-	<html lang="en">
+<html lang="en">
 	<head>
 		<title>Personal Profile</title>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
   	<style>
-    body {
-      height: 100vh;
-      width: 100vw;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-135deg, #c850c0, #4158d0);
-    }
+			body {
+				height: 100vh;
+				width: 100vw;
+				margin: 0;
+				padding: 0;
+				background: linear-gradient(-135deg, #c850c0, #4158d0);
+			}
 
-    *
-	{
-      box-sizing: border-box;
-    }
+			* {
+				box-sizing: border-box;
+			}
 
-    .container {
-      height: 80%;
-      width: 100%;
-    }
+			.containerForm {
+				background-color: white;
+				font-family: 'Times New Roman', Times, serif;
+				border-radius: 5px;
+				display: none;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				width: 40%;
+				padding: 10px;
+				margin: 0;
+				min-width: 500px;
+				min-height: fit-content;
+				transform: translateX(50%) translateY(50%);
+			}
 
-    .containerForm {
-      position: relative;
-      background-color: white;
-      font-family: 'Times New Roman', Times, serif;
-      border-radius: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 50%;
-      padding: 10px;
-      margin: 0;
-      min-width: 500px;
-      max-width: 700px;
-      min-height: fit-content;
-    }
+			.profileForm {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-evenly;
+				flex-direction: column;
+				text-align: center;
+				overflow-y: hidden;
+				overflow-x: hidden;
+			}
 
-    .PersonalProfile {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      flex-direction: column;
-	  text-align: center;
-      overflow-y: hidden;
-      overflow-x: hidden;
-    }
-    input {
-      outline: solid black 2px;
-      border: none;
-      border-radius: 5px;
-      padding: 10px;
-      transition: outline-offset .2s linear;
-      width: 50%;
-    }
+			input {
+				outline: solid black 2px;
+				border: none;
+				border-radius: 5px;
+				padding: 10px;
+				transition: outline-offset .2s linear;
+				width: 50%;
+			}
 
-    input:focus {
-      outline-offset: 3px;
-    }
+			input:focus {
+				outline-offset: 3px;
+			}
 
-    label {
-      font-size: large;
-      font-weight: 600;
-      width: 100%;
-      margin: 5px;
-    }
+			label {
+				font-size: large;
+				font-weight: 600;
+				width: 100%;
+				margin: 5px;
+			}
 
-    button {
-      padding: 10px;
-      background: #57b846;
-      font-size: 15px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      border-radius: 25px;
-      transition: background .4s;
-      width: 50%;
-    }
-    button:hover {
-      background: #333333;
-    }
+			button {
+				padding: 10px;
+				background: #57b846;
+				font-size: 15px;
+				border: none;
+				border-radius: 5px;
+				color: white;
+				cursor: pointer;
+				border-radius: 25px;
+				transition: background .4s;
+				width: 50%;
+			}
 
-	::placeholder
-	{
-		color: #4158d0;
-	}
+			button:hover {
+				background: #333333;
+			}
 
-	.force-opaque::placeholder
-	{
-		opacity: 1;
-	}
+			::placeholder {
+				color: #4158d0;
+			}
 
-    label > div {
-        margin: 5px;
-    }
-	
-	header
-	{
-		font-size: larger;
-		color: #c850c0;
-	}
+			.force-opaque::placeholder {
+				opacity: 1;
+			}
 
-  </style>
-    <div class="containerForm">
-      <!-- 
-    	- Full Name (50 characters, required)
+			label > div {
+				margin: 5px;
+			}
+			
+			header {
+				font-size: larger;
+				color: #c850c0;
+			}
+
+			.containerProfile {
+				width: 50%;
+				height: 50%;
+				display: flex;
+				min-width: 500px;
+				transform: translateX(50%) translateY(50%);
+				background-color: white;
+			}
+		</style>
+		<div class="containerProfile">
+
+		</div>
+		<div class="containerForm">
+			<!-- 
+			- Full Name (50 characters, required)
 			- Address 1 (100 characters, required)
 			- Address 2 (100 characters, optional)
 			- City (100 characters, required)
 			- State (Drop Down, selection required) DB will store 2 character state code
 			- Zipcode (9 characters, at least 5 character code required)
-      -->
-      <form class="PersonalProfile" action="/profileSubmit" method="POST">
+			-->
+			<form class="profileForm" action="/profileSubmit" method="POST">
 				<header>
 					<b>Personal Profile Information</b> 
 				</header>
-        <label for="name" >
+				<label for="name" >
 					<div>Full Name</div> 
 					<input type="text" name="name" placeholder="Full Name" class="force-opaque" maxlength="50" required/>
-        </label>
-        <label for="Address1">
+				</label>
+				<label for="Address1">
 					<div>Address 1</div> 
 					<input type="text" name="Address1" placeholder="Address" class="force-opaque" maxlength="100" required/>
-        </label>
+				</label>
 				<label for="Address2">
 					<div>Address 2</div> 
 					<input type="text" name="Address2" placeholder=" Address(optional)" class="force-opaque" maxlength="100"/>
-        </label>
+				</label>
 				<label for="City">
 					<div>City</div>
 					<input type="text" name="City" placeholder="City" class="force-opaque" maxlength="100" required/>
-        </label>
+				</label>
 				<label for="State">
 					<div>State</div>
 					<select name="State" id="State" required>
@@ -200,8 +200,9 @@
 				<label for="Zipcode" style="margin-bottom: 20px;">
 					<div>Zipcode</div>
 					<input type="number" name="Zipcode" placeholder="Zipcode" class="force-opaque" minlength="5" maxlength="9" required/>
-        </label>
-        <button type="submit">SUBMIT</button>
-      </form>
-</body>
+				</label>
+				<button type="submit">SUBMIT</button>
+			</form>
+		</div>
+	</body>
 </html>

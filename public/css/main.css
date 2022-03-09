@@ -74,11 +74,6 @@ p {
 	margin: 0px;
 }
 
-ul, li {
-	margin: 0px;
-	list-style-type: none;
-}
-
 
 /*---------------------------------------------*/
 input {
@@ -259,11 +254,6 @@ iframe {
   color: rgba(87,184,70, 0.8);
 }
 
-.input100:focus + .focus-input100 {
-  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-  animation: anim-shadow 0.5s ease-in-out forwards;
-}
-
 @-webkit-keyframes anim-shadow {
   to {
     box-shadow: 0px 0px 70px 25px;
@@ -301,11 +291,6 @@ iframe {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
-}
-
-.input100:focus + .focus-input100 + .symbol-input100 {
-  color: #57b846;
-  padding-left: 28px;
 }
 
 /*------------------------------------------------------------------

@@ -1,14 +1,14 @@
 const express = require('express');
 const profile = express();
-const { checkProfileInputLengths } = require('./utils.js');
+const { checkProfileInput } = require('./utils.js');
 
 profile.post('/changeprofile', (req, res) => {
   if (
-    checkProfileInputLengths(
-      req.body.name, 
-      req.body.Address1, 
-      req.body.City, 
-      req.body.State, 
+    checkProfileInput(
+      req.body.name,
+      req.body.Address1,
+      req.body.City,
+      req.body.State,
       req.body.Zipcode
     )
   ) {
