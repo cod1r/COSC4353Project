@@ -1,9 +1,15 @@
 const express = require('express');
 const register = express();
-const { checkRegisterInput } = require('./utils.js');
+const { checkRegisterInput, checkUsernameCharacters, checkPasswordCharacters } = require('./utils.js');
 
 register.post('/', (req, res) => {
-  if (checkRegisterInput(req.body.username, req.body.pass)) {
+  if (
+    req.body.Username && 
+    req.body.passw && 
+    checkUsernameCharacters(req.body.Username) && 
+    checkPasswordCharacters(req.body.pass) && 
+    checkRegisterInput(req.body.Username, req.body.pass)
+  ) {
     res.redirect('/login.html');
   }
 });

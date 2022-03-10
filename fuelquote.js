@@ -8,4 +8,8 @@ fuelQuote.post('/fuelQuoteForm', (req, res) => {
   }
 });
 
+fuelQuote.get('/', (req, res) => {
+
+});
+
 module.exports = fuelQuote;

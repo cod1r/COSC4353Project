@@ -6,78 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
 
-        body {
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(-135deg, #c850c0, #4158d0);
-        }
+    body {
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-135deg, #c850c0, #4158d0);
+    }
 
     * {
       box-sizing: border-box;
     }
 
     .container {
-      height: 80%;
-      width: 100%;
-    }
-
-    .containerForm {
-      position: relative;
+      overflow-y: auto;
       background-color: white;
       font-family: sans-serif;
       border-radius: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 50%;
-      width: 50%;
-      padding: 0;
-      margin: 0;
-      min-width: 500px;
-      max-width: 700px;
-    }
-
-    .formQuote {
-      width: 50%;
-      height: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      flex-direction: column;
-    }
-
-    
-    .outputContainer {
-      display: flex;
-      justify-content: center;
-      min-width: 500px;
-    }
-
-    .output {
-      padding: 20px;
-      margin: 10px;
-      font-size: large;
-      font-weight: 600;
-      border-bottom: solid 1px black;
+      padding: 40px;
+      height: 75%;
     }
 
     input {
@@ -87,15 +50,6 @@
       padding: 10px;
       transition: outline-offset .2s linear;
       width: 50%;
-    }
-
-    input:focus {
-      outline-offset: 3px;
-    }
-
-    label {
-      font-size: large;
-      font-weight: 600;
     }
 
     button {
@@ -113,62 +67,62 @@
     button:hover {
       background: #333333;
     }
+    .fuelHistoryContainer {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    #fuelHistory {
+      height: 100%;
+    }
+    h3 {
+      padding: 0;
+      margin: 0;
+    }
   </style>
-    <div class="containerForm">
-      <!-- 
-      - Gallons Requested (numeric, required)
-      - Delivery Address (Non-editable, comes from client profile)
-      - Delivery Date (Calender, date picker)
-      - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
-      - Total Amount Due (numeric non-editable, calculated (gallons * price)) 
-      -->
-        <form class="fuelHistory">
-            <label for="history">
-                <form>
-                  Fuel Quote History
-                </form>
-            </label>
-            <table>
-                <tr>
-                    <th>Quote Date</th>
-                    <th>Gallons Requested</th>
-                    <th>Delivery Address</th>
-                    <th>Delivery Date</th>
-                    <th>Suggested Price</th>
-                    <th>Total Amount Due</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </form>
-        <div class="text-center p-t-136">
-          <a class="txt2" href="/fuelQuoteForm.html">
+  <div class="container">
+    <!-- 
+    - Gallons Requested (numeric, required)
+    - Delivery Address (Non-editable, comes from client profile)
+    - Delivery Date (Calender, date picker)
+    - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
+    - Total Amount Due (numeric non-editable, calculated (gallons * price)) 
+    -->
+      <div class="fuelHistoryContainer">
+        <h3 style="text-align: center; width: 100%; display: block;">
+          Fuel Quote History
+        </h3>
+        <div id="fuelHistory">
+          <table>
+            <tr>
+              <th>Quote Date</th>
+              <th>Gallons Requested</th>
+              <th>Delivery Address</th>
+              <th>Delivery Date</th>
+              <th>Suggested Price</th>
+              <th>Total Amount Due</th>
+            </tr>
+          </table>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="/fuelQuoteForm.html">
             Fuel Quote Form
-            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
           </a>
         </div>
-    </div>
+      </div>
+  </div>
 </body>
+<script>
+  function populateTable() {
+    let fuelHistory = document.querySelector('fuelHistory');
+    let tableRow = document.createElement('tr');
+    let tableData = document.createElement('td');
+    for (let i = 0; i < 5; i++) {
+      tableRow.appendChild(tableData);
+    }
+    fuelHistory.appendChild(tableRow);
+  }
+</script>
 </html>

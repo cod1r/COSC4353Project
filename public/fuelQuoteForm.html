@@ -3,6 +3,7 @@
 <head>
 	<title>Fuel Quote Form</title>
 	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
 </head>
 <body>
   <style>
@@ -15,19 +16,15 @@
       justify-content: center;
       align-items: center;
       background: linear-gradient(-135deg, #c850c0, #4158d0);
+      overflow-y: auto;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    .container {
-      height: 80%;
-      width: 100%;
-    }
-
     .containerForm {
-      position: relative;
+      overflow-x: auto;
       background-color: white;
       font-family: sans-serif;
       border-radius: 5px;
@@ -35,17 +32,13 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 50%;
-      width: 50%;
-      padding: 0;
+      padding: 40px;
       margin: 0;
-      min-width: 500px;
-      max-width: 700px;
+      overflow-y: auto;
     }
 
     .formQuote {
-      width: 50%;
-      height: 50%;
+      width: 75%;
       display: flex;
       align-items: center;
       justify-content: space-evenly;
@@ -55,7 +48,6 @@
     .outputContainer {
       display: flex;
       justify-content: center;
-      min-width: 500px;
     }
 
     .output {
@@ -73,6 +65,7 @@
       padding: 10px;
       transition: outline-offset .2s linear;
       width: 50%;
+      margin: 10px;
     }
 
     input:focus {
@@ -82,6 +75,7 @@
     label {
       font-size: large;
       font-weight: 600;
+      text-align: center;
     }
 
     button {
@@ -95,9 +89,16 @@
       border-radius: 25px;
       transition: background .4s;
       width: 50%;
+      margin: 10px;
     }
     button:hover {
       background: #333333;
+    }
+
+    @media (max-width: 750px) {
+      input, label, .formQuote {
+        width: 100%;
+      }
     }
   </style>
     <div class="containerForm">
