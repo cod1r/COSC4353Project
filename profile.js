@@ -17,7 +17,7 @@ profile.post('/changeprofile', (req, res) => {
 });
 
 profile.get('/', (req, res) => {
-
+  
 });
 
 module.exports = profile;
