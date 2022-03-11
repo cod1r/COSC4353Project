@@ -9,7 +9,16 @@ fuelQuote.post('/fuelQuoteForm', (req, res) => {
 });
 
 fuelQuote.get('/', (req, res) => {
-
+  res.status(200).json({
+    1: {
+      QuoteDate: '0000-00-00',
+      GallonsRequested: 0,
+      DeliveryAddress: 'URMOM',
+      DeliveryDate: '9999-99-99',
+      SuggestedPrice: '42069',
+      TotalAmount: 999999
+    }
+  });
 });
 
 module.exports = fuelQuote;

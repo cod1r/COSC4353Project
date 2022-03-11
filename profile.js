@@ -17,7 +17,14 @@ profile.post('/changeprofile', (req, res) => {
 });
 
 profile.get('/', (req, res) => {
-  
+  res.status(200).json({
+    FullName: 'BILLY JOE',
+    Address1: 'BILLY\'S HOME',
+    Address2: '',
+    City: 'BILLY\'S CITY',
+    State: 'BILLY\'S STATE',
+    Zipcode: 'BILLY\'S ZIPCODE'
+  })
 });
 
 module.exports = profile;

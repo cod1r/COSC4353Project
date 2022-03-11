@@ -4,20 +4,10 @@
 		<title>Personal Profile</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/main.css">
 	</head>
 	<body>
   	<style>
-			body {
-				height: 100vh;
-				width: 100vw;
-				margin: 0;
-				padding: 0;
-				background: linear-gradient(-135deg, #c850c0, #4158d0);
-			}
-
-			* {
-				box-sizing: border-box;
-			}
 
 			.containerForm {
 				background-color: white;
@@ -30,7 +20,6 @@
 				width: 50%;
 				padding: 10px;
 				margin: 0;
-				min-width: 500px;
 				transform: translateX(50%) translateY(25%);
 			}
 
@@ -104,7 +93,6 @@
 				width: 50%;
 				height: 50%;
 				display: flex;
-				min-width: 500px;
 				transform: translateX(50%) translateY(50%);
 				background-color: white;
 				flex-direction: column;
@@ -114,10 +102,40 @@
 
 			.userInfoContainer {
 				display: flex;
-				width: 100%;
-				justify-content: center;
+				width: 50%;
+				justify-content: space-between;
+			}
+
+			@media (max-width: 750px) {
+				.containerProfile, .containerForm {
+					width: 100%;
+					transform: none;
+				}
+
+				input, .userInfoContainer {
+					width: 80%;
+				}
 			}
 		</style>
+  <div class="navbar">
+    <div class="navLink">
+      <a href="profile.html">profile</a>
+    </div>
+    <div class="navLink">
+      <a href="quoteHistory.html">quote history</a>
+    </div>
+    <div class="navLink">
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="responsive-nav">
+    <button>Links</button>
+    <div>
+      <a href="profile.html">profile</a>
+      <a href="quoteHistory.html">quote history</a>
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
 		<div title="User Profile" class="containerProfile">
 			<header>
 				<b>Personal Profile Information</b> 
@@ -256,5 +274,25 @@
 				containerProfile.style.display = 'none';
 			}
 		}
+
+		fetch('/profile/', {
+			method: 'GET'
+		}).then(async (res) => {
+			let personalInfo = await res.json();
+
+			document.querySelector('#FullName').innerText = personalInfo.FullName;
+			document.querySelector('#Address1').innerText = personalInfo.Address1;
+			document.querySelector('#Address2').innerText = personalInfo.Address2;
+			document.querySelector('#City').innerText = personalInfo.City;
+			document.querySelector('#State').innerText = personalInfo.State;
+			document.querySelector('#Zipcode').innerText = personalInfo.Zipcode;
+		});
+
+    let responsiveButton = document.querySelector('.responsive-nav > button');
+    responsiveButton.onclick = function () {
+      let links = document.querySelector('.responsive-nav > div');
+      links.style.display = (links.style.display === 'none') ? 'flex':'none';
+      links.style.flexDirection = 'column';
+    }
 	</script>
 </html>

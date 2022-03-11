@@ -4,6 +4,7 @@
 	<title>Fuel Quote History</title>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <style>
@@ -19,28 +20,16 @@
       padding: 8px;
     }
 
-    body {
-      height: 100vh;
-      width: 100vw;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-135deg, #c850c0, #4158d0);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     .container {
       overflow-y: auto;
       background-color: white;
       font-family: sans-serif;
       border-radius: 5px;
       padding: 40px;
-      height: 75%;
+      margin: 20px;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
     }
 
     input {
@@ -80,7 +69,32 @@
       padding: 0;
       margin: 0;
     }
+
+    @media (max-width: 750px) {
+      .container {
+        padding: 0;
+      }
+    }
   </style>
+  <div class="navbar">
+    <div class="navLink">
+      <a href="profile.html">profile</a>
+    </div>
+    <div class="navLink">
+      <a href="quoteHistory.html">quote history</a>
+    </div>
+    <div class="navLink">
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="responsive-nav">
+    <button>Links</button>
+    <div>
+      <a href="profile.html">profile</a>
+      <a href="quoteHistory.html">quote history</a>
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
   <div class="container">
     <!-- 
     - Gallons Requested (numeric, required)
@@ -105,12 +119,6 @@
             </tr>
           </table>
         </div>
-
-        <div style="text-align: center;">
-          <a href="/fuelQuoteForm.html">
-            Fuel Quote Form
-          </a>
-        </div>
       </div>
   </div>
 </body>
@@ -124,5 +132,40 @@
     }
     fuelHistory.appendChild(tableRow);
   }
+  let responsiveButton = document.querySelector('.responsive-nav > button');
+  responsiveButton.onclick = function () {
+    let links = document.querySelector('.responsive-nav > div');
+    links.style.display = (links.style.display === 'none') ? 'flex':'none';
+    links.style.flexDirection = 'column';
+  }
+  fetch('/fuelQuote/', {
+    method: 'GET'
+  }).then(async (res) => {
+    let quoteHistory = await res.json();
+    let row = document.createElement('tr');
+    for (let index in quoteHistory) {
+      let tdQuoteDate = document.createElement('td');
+      let tdGallonsRequested = document.createElement('td');
+      let tdDeliveryAddress = document.createElement('td');
+      let tdDeliveryDate = document.createElement('td');
+      let tdSuggestedPrice = document.createElement('td');
+      let tdTotalAmount = document.createElement('td');
+
+      tdQuoteDate.innerText = quoteHistory[index].QuoteDate;
+      tdGallonsRequested.innerText = quoteHistory[index].GallonsRequested;
+      tdDeliveryAddress.innerText = quoteHistory[index].DeliveryAddress;
+      tdDeliveryDate.innerText = quoteHistory[index].DeliveryDate;
+      tdSuggestedPrice.innerText = quoteHistory[index].SuggestedPrice;
+      tdTotalAmount.innerText = quoteHistory[index].TotalAmount;
+      row.appendChild(tdQuoteDate);
+      row.appendChild(tdGallonsRequested);
+      row.appendChild(tdDeliveryAddress);
+      row.appendChild(tdDeliveryDate);
+      row.appendChild(tdSuggestedPrice);
+      row.appendChild(tdTotalAmount);
+    }
+    let table = document.querySelector('#fuelHistory > table');
+    table.appendChild(row);
+  });
 </script>
 </html>
