@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fuel Quote Form</title>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <style>
+    .containerForm {
+      width: 50%;
+      transform: translateX(50%) translateY(50%);
+      background-color: white;
+      font-family: sans-serif;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .formQuote {
+      width: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+    }
+    
+    .outputContainer {
+      min-width: min-content;
+    }
+
+    .output {
+      padding: 20px;
+      margin: 10px;
+      font-size: large;
+      font-weight: 600;
+      border-bottom: solid 1px black;
+    }
+
+    input {
+      outline: solid black 2px;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      transition: outline-offset .2s linear;
+      width: 50%;
+      margin: 10px;
+    }
+
+    input:focus {
+      outline-offset: 3px;
+    }
+
+    label {
+      font-size: large;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px;
+      background: #57b846;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: background .4s;
+      width: 50%;
+      margin: 10px;
+    }
+    button:hover {
+      background: #333333;
+    }
+
+
+
+    @media (max-width: 900px) {
+      .containerForm, .formQuote, input {
+        width: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .containerForm {
+        transform: none;
+        width: 80%;
+      }
+    }
+  </style>
+  <div class="navbar">
+    <div class="navLink">
+      <a href="profile.html">profile</a>
+    </div>
+    <div class="navLink">
+      <a href="quoteHistory.html">quote history</a>
+    </div>
+    <div class="navLink">
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="responsive-nav">
+    <button>Links</button>
+    <div>
+      <a href="profile.html">profile</a>
+      <a href="quoteHistory.html">quote history</a>
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="containerForm">
+    <!-- 
+    - Gallons Requested (numeric, required)
+    - Delivery Address (Non-editable, comes from client profile)
+    - Delivery Date (Calender, date picker)
+    - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
+    - Total Amount Due (numeric non-editable, calculated (gallons * price)) 
+    -->
+    <form class="formQuote">
+      <label for="gallons">
+        Gallons Requested
+      </label>
+      <input type="number" name="gallons" placeholder="Gallons Requested" required/>
+      <label for="date">
+        Choose your delivery date
+      </label>
+      <input type="date" name="date" placeholder="Delivery date" required/>
+      <button type="submit">SUBMIT</button>
+    </form>
+    <div class="outputContainer">
+      <div class="output">
+        <div>Delivery Address</div> 
+        <div></div>
+      </div>
+      <div class="output">
+        <div>Suggested Price</div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let responsiveButton = document.querySelector('.responsive-nav > button');
+    responsiveButton.onclick = function () {
+      let links = document.querySelector('.responsive-nav > div');
+      links.style.display = (links.style.display === 'none') ? 'flex':'none';
+      links.style.flexDirection = 'column';
+    }
+  </script>
+</body>
+</html>

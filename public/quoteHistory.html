@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fuel Quote History</title>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    .container {
+      overflow-y: auto;
+      background-color: white;
+      font-family: sans-serif;
+      border-radius: 5px;
+      padding: 40px;
+      margin: 20px;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
+    }
+
+    input {
+      outline: solid black 2px;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      transition: outline-offset .2s linear;
+      width: 50%;
+    }
+
+    button {
+      padding: 10px;
+      background: #57b846;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: background .4s;
+      width: 50%;
+    }
+    button:hover {
+      background: #333333;
+    }
+    .fuelHistoryContainer {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    #fuelHistory {
+      height: 100%;
+      overflow-y: auto;
+    }
+    h3 {
+      padding: 0;
+      margin: 0;
+    }
+
+    @media (max-width: 750px) {
+      .container {
+        padding: 0;
+      }
+    }
+  </style>
+  <div class="navbar">
+    <div class="navLink">
+      <a href="profile.html">profile</a>
+    </div>
+    <div class="navLink">
+      <a href="quoteHistory.html">quote history</a>
+    </div>
+    <div class="navLink">
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="responsive-nav">
+    <button>Links</button>
+    <div>
+      <a href="profile.html">profile</a>
+      <a href="quoteHistory.html">quote history</a>
+      <a href="fuelQuoteForm.html">fuel quote form</a>
+    </div>
+  </div>
+  <div class="container">
+    <!-- 
+    - Gallons Requested (numeric, required)
+    - Delivery Address (Non-editable, comes from client profile)
+    - Delivery Date (Calender, date picker)
+    - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
+    - Total Amount Due (numeric non-editable, calculated (gallons * price)) 
+    -->
+      <div class="fuelHistoryContainer">
+        <h3 style="text-align: center; width: 100%; display: block;">
+          Fuel Quote History
+        </h3>
+        <div id="fuelHistory">
+          <table>
+            <tr>
+              <th>Quote Date</th>
+              <th>Gallons Requested</th>
+              <th>Delivery Address</th>
+              <th>Delivery Date</th>
+              <th>Suggested Price</th>
+              <th>Total Amount Due</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+  </div>
+</body>
+<script>
+  function populateTable() {
+    let fuelHistory = document.querySelector('fuelHistory');
+    let tableRow = document.createElement('tr');
+    let tableData = document.createElement('td');
+    for (let i = 0; i < 5; i++) {
+      tableRow.appendChild(tableData);
+    }
+    fuelHistory.appendChild(tableRow);
+  }
+  let responsiveButton = document.querySelector('.responsive-nav > button');
+  responsiveButton.onclick = function () {
+    let links = document.querySelector('.responsive-nav > div');
+    links.style.display = (links.style.display === 'none') ? 'flex':'none';
+    links.style.flexDirection = 'column';
+  }
+  fetch('/fuelQuote/', {
+    method: 'GET'
+  }).then(async (res) => {
+    let quoteHistory = await res.json();
+    let row = document.createElement('tr');
+    for (let index in quoteHistory) {
+      let tdQuoteDate = document.createElement('td');
+      let tdGallonsRequested = document.createElement('td');
+      let tdDeliveryAddress = document.createElement('td');
+      let tdDeliveryDate = document.createElement('td');
+      let tdSuggestedPrice = document.createElement('td');
+      let tdTotalAmount = document.createElement('td');
+
+      tdQuoteDate.innerText = quoteHistory[index].QuoteDate;
+      tdGallonsRequested.innerText = quoteHistory[index].GallonsRequested;
+      tdDeliveryAddress.innerText = quoteHistory[index].DeliveryAddress;
+      tdDeliveryDate.innerText = quoteHistory[index].DeliveryDate;
+      tdSuggestedPrice.innerText = quoteHistory[index].SuggestedPrice;
+      tdTotalAmount.innerText = quoteHistory[index].TotalAmount;
+      row.appendChild(tdQuoteDate);
+      row.appendChild(tdGallonsRequested);
+      row.appendChild(tdDeliveryAddress);
+      row.appendChild(tdDeliveryDate);
+      row.appendChild(tdSuggestedPrice);
+      row.appendChild(tdTotalAmount);
+    }
+    let table = document.querySelector('#fuelHistory > table');
+    table.appendChild(row);
+  });
+</script>
+</html>
