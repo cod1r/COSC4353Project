@@ -89,4 +89,3 @@ test('checkProfileInput - empty', () => {
 test('checkProfileInput - too long state', () => {
   expect(Util.checkProfileInput('billy', 'bob', '', 'bo', '77001')).toBe(true);
 })
-
