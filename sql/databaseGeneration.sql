@@ -4,11 +4,14 @@ DROP TABLE IF EXISTS user_login, user_info, fuel_quote_history;
 
 /* find out the minimum lengths for all of these fields */ 
 /* password needs encryption */ 
+/* password needs a max length in the frontend */ 
 CREATE TABLE user_login (
 	user_id SERIAL NOT NULL,
-    username VARCHAR(50),
+    username VARCHAR(20),
     password VARCHAR(50),
 
+    CONSTRAINT min_username_length CHECK (LENGTH(username) >= 5),
+    CONSTRAINT min_password_length CHECK (LENGTH(password) >= 8),
     PRIMARY KEY (user_id)
 );
 
