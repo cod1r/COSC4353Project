@@ -2,7 +2,7 @@ const express = require('express');
 const profile = express();
 const { checkProfileInput } = require('./utils.js');
 
-profile.post('/changeprofile', (req, res) => {
+profile.post('/changeProfile', (req, res) => {
   if (
     checkProfileInput(
       req.body.name,
@@ -12,9 +12,11 @@ profile.post('/changeprofile', (req, res) => {
       req.body.Zipcode
     )
   ) {
+    res.redirect('/profile.html');
     res.status(200).end();
   }
 });
+
 
 profile.get('/', (req, res) => {
   res.status(200).json({
