@@ -1,5 +1,7 @@
 const express = require('express');
 const connection = require('./creds.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const login = express();
 const { checkLoginInput, checkUsernameCharacters, checkPasswordCharacters } = require('./utils.js');
 
@@ -16,16 +18,23 @@ login.post('/', (req, res) => {
         if (error) throw error;
         if (results.rowCount == 0) {
           console.log(results.rowCount);
-          // username doesn't exist 
-        } else if (results.password == req.body.pass) {
-          console.log(results.password);
-          // complete successful login 
-        } else {
-          console.log("Invalid Password");
-          // invalid password 
+          return;
         }
+        bcrypt.compare(req.body.pass, results[0].password, function(err, result) {
+          if (result) {
+            jwt.sign({name: req.body.Username}, process.env.secret, function (err, decoded) {
+              res.cookie('token', decoded, { 
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
+                httpOnly: true 
+              });
+              res.redirect('/profile.html');
+            });
+          }
+          else {
+            res.status(401).end();
+          }
+        });
       });
-    res.redirect('/profile.html');
   }
 });
 

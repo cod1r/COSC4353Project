@@ -4,7 +4,10 @@ const loginModule = require('./login.js');
 const registerModule = require('./register.js');
 const profileModule = require('./profile.js');
 const fuelQuoteModule = require('./fuelquote.js');
+const express = require('express');
+const sessions = require('express-session');
 const port = 3000;
+
 
 app.use(express.static('public'))
 app.use(express.json())
