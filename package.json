@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "jest",
-    "run": "node app.js -r dotenv/config"
+    "start": "DOTENV_CONFIG_PATH=./.env node -r dotenv/config app.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

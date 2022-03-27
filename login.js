@@ -3,7 +3,7 @@ const connection = require('./creds.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const login = express();
-const { checkLoginInput, checkUsernameCharacters, checkPasswordCharacters } = require('./utils.js');
+const { checkLoginInput, checkUsernameCharacters, checkPasswordCharacters, verifyToken } = require('./utils.js');
 
 login.post('/', (req, res) => {
   if (
@@ -22,13 +22,15 @@ login.post('/', (req, res) => {
         }
         bcrypt.compare(req.body.pass, results[0].password, function(err, result) {
           if (result) {
-            jwt.sign({name: req.body.Username}, process.env.secret, function (err, decoded) {
-              res.cookie('token', decoded, { 
-                expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
-                httpOnly: true 
+            if (!req.cookies?.token) {
+              jwt.sign({name: req.body.Username}, process.env.secret, function (err, token) {
+                res.cookie('token', token, { 
+                  expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
+                  httpOnly: true 
+                });
               });
-              res.redirect('/profile.html');
-            });
+            }
+            res.redirect('/profile.html');
           }
           else {
             res.status(401).end();

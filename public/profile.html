@@ -279,7 +279,7 @@
 			method: 'GET'
 		}).then(async (res) => {
 			let personalInfo = await res.json();
-
+			console.log(personalInfo);
 			document.querySelector('#FullName').innerText = personalInfo.FullName;
 			document.querySelector('#Address1').innerText = personalInfo.Address1;
 			document.querySelector('#Address2').innerText = personalInfo.Address2;

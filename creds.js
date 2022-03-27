@@ -3,7 +3,8 @@ var connection = mysql.createConnection({
   host     : 'database-1.cyt5qx5ieqdg.us-east-1.rds.amazonaws.com',
   user     : 'admin',
   password : 'wCPfNZmcK$8w*h',
-  database : 'projectdb'
+  database : 'projectdb',
+  multipleStatements: true
 });
  
 connection.connect(function(err) {

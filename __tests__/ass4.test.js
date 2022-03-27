@@ -9,3 +9,4 @@ test('verify valid Token', () => {
 test('verify shitty token', () => {
   expect(Util.verifyToken(jwt.sign({name: 'urmom'}, '23423423423'))).toBe(null);
 });
+
