@@ -1,6 +1,9 @@
 const express = require('express');
+const connection = require('./creds.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const login = express();
-const { checkLoginInput, checkUsernameCharacters, checkPasswordCharacters } = require('./utils.js');
+const { checkLoginInput, checkUsernameCharacters, checkPasswordCharacters, verifyToken } = require('./utils.js');
 
 login.post('/', (req, res) => {
   if (
@@ -10,7 +13,30 @@ login.post('/', (req, res) => {
     checkPasswordCharacters(req.body.pass) && 
     checkLoginInput(req.body.Username, req.body.pass)
   ) {
-    res.redirect('/profile.html');
+      connection.query(`SELECT * FROM user_login WHERE username = ?;`, 
+      [req.body.Username], function (error, results, fields) {
+        if (error) throw error;
+        if (results.rowCount == 0) {
+          console.log(results.rowCount);
+          return;
+        }
+        bcrypt.compare(req.body.pass, results[0].password, function(err, result) {
+          if (result) {
+            if (!req.cookies?.token) {
+              jwt.sign({name: req.body.Username}, process.env.secret, function (err, token) {
+                res.cookie('token', token, { 
+                  expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
+                  httpOnly: true 
+                });
+              });
+            }
+            res.redirect('/profile.html');
+          }
+          else {
+            res.status(401).end();
+          }
+        });
+      });
   }
 });
 

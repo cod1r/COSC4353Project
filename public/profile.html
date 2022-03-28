@@ -175,7 +175,7 @@
 			- State (Drop Down, selection required) DB will store 2 character state code
 			- Zipcode (9 characters, at least 5 character code required)
 			-->
-			<form class="form" action="/profileSubmit" method="POST">
+			<form class="form" action="profile/changeProfile" method="POST">
 				<header>
 					<b>Change your Personal Profile</b> 
 				</header>
@@ -279,7 +279,7 @@
 			method: 'GET'
 		}).then(async (res) => {
 			let personalInfo = await res.json();
-
+			console.log(personalInfo);
 			document.querySelector('#FullName').innerText = personalInfo.FullName;
 			document.querySelector('#Address1').innerText = personalInfo.Address1;
 			document.querySelector('#Address2').innerText = personalInfo.Address2;

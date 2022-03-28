@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 // Utility Functions (Ex: functions that check for length etc)
 
 function checkUsernameCharacters(input) {
@@ -24,6 +25,15 @@ function checkFuelQuoteFormInput(gallons, deliveryDate) {
   return gallons > 0 && (new Date(deliveryDate).toString()) !== 'Invalid Date';
 }
 
+function verifyToken(token) {
+  try {
+    return jwt.verify(token, process.env.secret);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
 function isNumber(input) {
   return !(Number.isNaN(Number(input)));
 }
@@ -35,3 +45,4 @@ exports.checkFuelQuoteFormInput = checkFuelQuoteFormInput;
 exports.isNumber = isNumber;
 exports.checkUsernameCharacters = checkUsernameCharacters;
 exports.checkPasswordCharacters = checkPasswordCharacters;
+exports.verifyToken = verifyToken;

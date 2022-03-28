@@ -143,8 +143,8 @@
     method: 'GET'
   }).then(async (res) => {
     let quoteHistory = await res.json();
-    let row = document.createElement('tr');
     for (let index in quoteHistory) {
+      let row = document.createElement('tr');
       let tdQuoteDate = document.createElement('td');
       let tdGallonsRequested = document.createElement('td');
       let tdDeliveryAddress = document.createElement('td');
@@ -164,9 +164,9 @@
       row.appendChild(tdDeliveryDate);
       row.appendChild(tdSuggestedPrice);
       row.appendChild(tdTotalAmount);
+      let table = document.querySelector('#fuelHistory > table');
+      table.appendChild(row);
     }
-    let table = document.querySelector('#fuelHistory > table');
-    table.appendChild(row);
   });
 </script>
 </html>
