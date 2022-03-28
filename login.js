@@ -13,12 +13,15 @@ login.post('/', (req, res) => {
     checkPasswordCharacters(req.body.pass) && 
     checkLoginInput(req.body.Username, req.body.pass)
   ) {
-      connection.query(`SELECT * FROM user_login WHERE username = ?;`, 
-      [req.body.Username], function (error, results, fields) {
+      connection.query(`SELECT * FROM user_login WHERE username = ? && password = ?;`, 
+      [req.body.Username, req.body.pass], function (error, results, fields) {
         if (error) throw error;
-        if (results.rowCount == 0) {
-          console.log(results.rowCount);
-          return;
+        console.log(results.length);
+        if (results.length == 0) {
+          console.log(results.length);
+          //res.redirect('/login.html');
+          //res.status(200).end();
+          return; 
         }
         bcrypt.compare(req.body.pass, results[0].password, function(err, result) {
           if (result) {

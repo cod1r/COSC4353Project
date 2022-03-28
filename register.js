@@ -21,24 +21,34 @@ register.post('/', (req, res) => {
     //       });
 
     // need error checking to make sure the username isn't already taken
-    bcrypt.hash(req.body.pass, 10, function(err, hash) {
-      connection.query(`
-          INSERT INTO user_login (username, password)
-          VALUES (?, ?); 
-          INSERT INTO user_info (username, full_name, address1, address2, city, state, zipcode)
-          VALUES (?, '-1', '-1', '-1', '-1', '-1', '-1111111');
-          `, [req.body.Username, hash, req.body.Username], function (error, results, fields) 
-          {
-            if (error) throw error;
-            jwt.sign({name: req.body.Username}, process.env.secret, function (err, token) {
-              res.cookie('token', token, { 
-                expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
-                httpOnly: true 
+    connection.query(`SELECT * FROM user_login WHERE username = ?`, 
+    [req.body.Username], function (error, results, fields) {
+      if (error) throw error;
+      if (results.length > 0) {
+        console.log("Username already exists");
+        //res.json("Username already taken")
+        return; 
+      } else {
+        bcrypt.hash(req.body.pass, 10, function(err, hash) {
+          connection.query(`
+              INSERT INTO user_login (username, password)
+              VALUES (?, ?); 
+              INSERT INTO user_info (username, full_name, address1, address2, city, state, zipcode)
+              VALUES (?, '', '', '', '', '', '     ');`, 
+              [req.body.Username, hash, req.body.Username], function (error, results, fields) {
+                if (error) throw error;
+                jwt.sign({name: req.body.Username}, process.env.secret, function (err, token) {
+                  res.cookie('token', token, { 
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24), 
+                    httpOnly: true 
+                  });
+                  res.redirect('/login.html');
+                });
               });
-              res.redirect('/login.html');
-            });
-          });
+        });
+      }
     });
+    
     } 
 });
 
