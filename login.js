@@ -13,7 +13,7 @@ login.post('/', (req, res) => {
     checkPasswordCharacters(req.body.pass) && 
     checkLoginInput(req.body.Username, req.body.pass)
   ) {
-      connection.query(`SELECT * FROM user_login WHERE username = ? && password = ?;`, 
+      connection.query(`SELECT * FROM UserCredentials WHERE username = ? && password = ?;`, 
       [req.body.Username, req.body.pass], function (error, results, fields) {
         if (error) throw error;
         console.log(results.length);

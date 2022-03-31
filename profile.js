@@ -20,7 +20,7 @@ profile.post('/changeProfile', (req, res) => {
   var decoded = verifyToken(req.cookies.token);
   if (decoded) {
     connection.query(`
-    UPDATE user_info 
+    UPDATE ClientInformation 
     SET full_name = ?, 
         address1 = ?, 
         address2 = ?, 
@@ -43,7 +43,7 @@ profile.get('/', (req, res) => {
   if (req.cookies.token) {
     var decoded = verifyToken(req.cookies.token);
     if (decoded) {
-      connection.query(`SELECT * FROM user_info WHERE username = ?;`, 
+      connection.query(`SELECT * FROM ClientInformation WHERE username = ?;`, 
       [decoded.name], function (error, results, fields) {
         if (error) throw error;
         res.status(200).json({

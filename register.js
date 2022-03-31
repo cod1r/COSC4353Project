@@ -21,7 +21,7 @@ register.post('/', (req, res) => {
     //       });
 
     // need error checking to make sure the username isn't already taken
-    connection.query(`SELECT * FROM user_login WHERE username = ?`, 
+    connection.query(`SELECT * FROM UserCredentials WHERE username = ?`, 
     [req.body.Username], function (error, results, fields) {
       if (error) throw error;
       if (results.length > 0) {
@@ -31,9 +31,9 @@ register.post('/', (req, res) => {
       } else {
         bcrypt.hash(req.body.pass, 10, function(err, hash) {
           connection.query(`
-              INSERT INTO user_login (username, password)
+              INSERT INTO UserCredentials (username, password)
               VALUES (?, ?); 
-              INSERT INTO user_info (username, full_name, address1, address2, city, state, zipcode)
+              INSERT INTO ClientInformation (username, full_name, address1, address2, city, state, zipcode)
               VALUES (?, '', '', '', '', '', '     ');`, 
               [req.body.Username, hash, req.body.Username], function (error, results, fields) {
                 if (error) throw error;
