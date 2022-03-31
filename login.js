@@ -13,16 +13,9 @@ login.post('/', (req, res) => {
     checkPasswordCharacters(req.body.pass) && 
     checkLoginInput(req.body.Username, req.body.pass)
   ) {
-      connection.query(`SELECT * FROM UserCredentials WHERE username = ? && password = ?;`, 
-      [req.body.Username, req.body.pass], function (error, results, fields) {
+      connection.query(`SELECT * FROM UserCredentials WHERE username = ?;`, 
+      [req.body.Username], function (error, results, fields) {
         if (error) throw error;
-        console.log(results.length);
-        if (results.length == 0) {
-          console.log(results.length);
-          //res.redirect('/login.html');
-          //res.status(200).end();
-          return; 
-        }
         bcrypt.compare(req.body.pass, results[0].password, function(err, result) {
           if (result) {
             if (!req.cookies?.token) {
@@ -36,11 +29,16 @@ login.post('/', (req, res) => {
             res.redirect('/profile.html');
           }
           else {
-            res.status(401).end();
-          }
+						res.status(401).json({
+							error: "WRONG LOSER"
+						});
+					}
         });
       });
   }
+	else {
+		res.status(401).end();
+	}
 });
 
 module.exports = login;
