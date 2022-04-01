@@ -6,11 +6,11 @@ const profileModule = require('./profile.js');
 const fuelQuoteModule = require('./fuelquote.js');
 const port = 3000;
 
-
-app.use(express.static('public'))
-app.use(express.json())
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.text());
 // for parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 // "Modules"
 app.use('/login', loginModule);

@@ -16,8 +16,8 @@ fuelQuote.post('/fuelQuoteForm', (req, res) => {
       let decoded = verifyToken(req.cookies.token);
       if (decoded) {
         connection.query(`
-        INSERT INTO fuel_quote_history (quote_date, username, gallons_requested, delivery_address, delivery_date, suggested_price_per_gallon, total_amount_due)
-        VALUES (?, ?, ?, (SELECT address1 FROM user_info WHERE username = ?), ?, 42069, 42069)`, 
+        INSERT INTO FuelQuote (quote_date, username, gallons_requested, delivery_address, delivery_date, suggested_price_per_gallon, total_amount_due)
+        VALUES (?, ?, ?, (SELECT address1 FROM UserCredentials WHERE username = ?), ?, 42069, 42069)`, 
           [formattedDate, decoded.name, req.body.gallons, decoded.name, req.body.date], function (error, results, fields) {
           if (error) throw error;
           if (results.rowCount == 0) {
@@ -35,7 +35,7 @@ fuelQuote.get('/', (req, res) => {
   if (req.cookies.token) {
     let decoded = verifyToken(req.cookies.token);
     if (decoded) {
-      connection.query(`SELECT * FROM fuel_quote_history WHERE username = ?;`, [decoded.name], function (error, results, fields) {
+      connection.query(`SELECT * FROM FuelQuote WHERE username = ?;`, [decoded.name], function (error, results, fields) {
         if (error) throw error;
         if (results.rowCount == 0) {
           console.log(results.rowCount);

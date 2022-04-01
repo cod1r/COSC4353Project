@@ -28,6 +28,7 @@
 						Account Creation
 					</span>
 
+					<div id="error" style="text-align: center; color: red;"></div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="Username" placeholder="Username" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!@#$%^&*()]{5,}$" required>
 						<span class="focus-input100"></span>
@@ -71,7 +72,7 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" id="register_button">
 							Create
 						</button>
 					</div>
@@ -88,5 +89,35 @@
 	</div>
 	<script src="/vendor/bootstrap/js/popper.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		function register(e) {
+			e.preventDefault();
+			let user = document.querySelector("[name='Username']");
+			let pass = document.querySelector("[name='pass']");
+			user.checkValidity();
+			pass.checkValidity();
+			fetch("/register/", {
+				method: "POST",
+				body: JSON.stringify({
+					Username: user.value,
+					pass: pass.value
+				}),
+				headers: new Headers([
+					["Content-Type", "application/json"]
+				])
+			}).then(async (res) => {
+				if (res.ok) {
+					window.location = res.url;
+				}
+				else {
+					let err = await res.json();
+					document.getElementById("error").innerText = err.error;
+				}
+			}).catch(err => {
+				document.getElementById("error").innerText = err;
+			});
+		}
+		document.getElementsByTagName("form")[0].onsubmit = register;
+	</script>
 </body>
 </html>

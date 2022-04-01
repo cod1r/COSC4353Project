@@ -1,11 +1,11 @@
 START TRANSACTION;
 
-DROP TABLE IF EXISTS user_login, user_info, fuel_quote_history;
+DROP TABLE IF EXISTS UserCredentials, ClientInformation, FuelQuote;
 
 /* find out the minimum lengths for all of these fields */ 
 /* password needs encryption */ 
 /* password needs a max length in the frontend */ 
-CREATE TABLE user_login (
+CREATE TABLE UserCredentials (
     username VARCHAR(20) NOT NULL,
     password VARCHAR(500) NOT NULL, 
 
@@ -15,7 +15,7 @@ CREATE TABLE user_login (
 );
 
 /* find out the minimum lengths for all of these fields */ 
-CREATE TABLE user_info (
+CREATE TABLE ClientInformation (
 	username VARCHAR(20) NOT NULL,
 	full_name VARCHAR(50) NOT NULL,
     address1 VARCHAR(100) NOT NULL,
@@ -25,13 +25,13 @@ CREATE TABLE user_info (
     zipcode VARCHAR(9) NOT NULL, 
 
     CONSTRAINT min_zipcode_length CHECK (LENGTH(zipcode) >= 5),
-    FOREIGN KEY (username) REFERENCES user_login(username),
+    FOREIGN KEY (username) REFERENCES UserCredentials(username),
     PRIMARY KEY (username)
 );
 
 /* find out the minimum lengths for all of these fields */ 
-CREATE TABLE fuel_quote_history (
-    fqh_id SERIAL NOT NULL,
+CREATE TABLE FuelQuote (
+    fq_id SERIAL NOT NULL,
     quote_date VARCHAR(20) NOT NULL,
     username VARCHAR(20) NOT NULL, 
     gallons_requested NUMERIC(18,2) NOT NULL,
@@ -40,10 +40,11 @@ CREATE TABLE fuel_quote_history (
     suggested_price_per_gallon NUMERIC(5,2) NOT NULL,
     total_amount_due NUMERIC(18,2) NOT NULL, 
 
-    FOREIGN KEY (username) REFERENCES user_login(username),
-    PRIMARY KEY(fqh_id)
+    FOREIGN KEY (username) REFERENCES UserCredentials(username),
+    PRIMARY KEY(fq_id)
 );
 
 COMMIT; 
+
 
 
