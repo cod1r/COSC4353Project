@@ -17,7 +17,11 @@ register.post('/', (req, res) => {
     // need error checking to make sure the username isn't already taken
     connection.query(`SELECT * FROM UserCredentials WHERE username = ?`, 
     [req.body.Username], function (error, results, fields) {
-      if (error) throw error;
+      if (error) {
+				console.error(error);
+				res.status(500).end();
+				return;
+			}
       if (results.length > 0) {
 				res.status(401).json({
 					error: "Username already taken"
