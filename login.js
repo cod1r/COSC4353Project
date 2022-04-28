@@ -36,14 +36,14 @@ login.post('/', (req, res) => {
 						}
 						else {
 							res.status(401).json({
-								error: "WRONG LOSER"
+								error: "WRONG USER INPUT"
 							});
 						}
 					});
 				}
 				else {
 					res.status(401).json({
-						error: "WRONG LOSER"
+						error: "WRONG USER INPUT"
 					});
 				}
       });

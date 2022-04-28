@@ -8,18 +8,22 @@ const { checkFuelQuoteFormInput, isNumber, verifyToken } = require('./utils.js')
 fuelQuote.use(cookieParser());
 
 fuelQuote.post('/fuelQuoteForm', (req, res) => {
-  if (isNumber(req.body.gallons) && checkFuelQuoteFormInput(Number(req.body.gallons), req.body.date)) {
+  let body = JSON.parse(req.body);
+  if (isNumber(body.gallons) && checkFuelQuoteFormInput(Number(body.gallons), body.date)) {
     let date = new Date();
     let formattedDate = `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
-    console.log(formattedDate);
     if (req.cookies?.token) {
       let decoded = verifyToken(req.cookies.token);
       if (decoded) {
         connection.query(`
         INSERT INTO FuelQuote (quote_date, username, gallons_requested, delivery_address, delivery_date, suggested_price_per_gallon, total_amount_due)
-        VALUES (?, ?, ?, (SELECT address1 FROM UserCredentials WHERE username = ?), ?, 42069, 42069)`, 
-          [formattedDate, decoded.name, req.body.gallons, decoded.name, req.body.date], function (error, results, fields) {
-          if (error) throw error;
+        VALUES (?, ?, ?, (SELECT address1 FROM ClientInformation WHERE username = ?), ?, 42069, 42690)`, 
+          [formattedDate, decoded.name, body.gallons, decoded.name, body.date], function (error, results, fields) {
+          if (error) {
+            console.error(error);
+            res.status(500).end();
+            return;
+          }
           if (results.rowCount == 0) {
             console.log(results.rowCount);
             return;

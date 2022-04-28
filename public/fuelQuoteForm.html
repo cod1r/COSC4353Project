@@ -127,21 +127,26 @@
       <label for="gallons">
         Gallons Requested
       </label>
-      <input type="number" name="gallons" placeholder="Gallons Requested" required/>
+      <input id="gallons" type="number" name="gallons" placeholder="Gallons Requested" required/>
       <label for="date">
         Choose your delivery date
       </label>
-      <input type="date" name="date" placeholder="Delivery date" required/>
-      <button type="submit">SUBMIT</button>
+      <input id="date" type="date" name="date" placeholder="Delivery date" required/>
+      <button id="getquote">GET QUOTE</button>
+      <button id="submit" type="submit">SUBMIT</button>
     </form>
     <div class="outputContainer">
       <div class="output">
         <div>Delivery Address</div> 
-        <div></div>
+        <div id="deliv_address_output"></div>
       </div>
       <div class="output">
         <div>Suggested Price</div>
-        <div></div>
+        <div id="suggested_price_output"></div>
+      </div>
+      <div class="output">
+        <div>Total</div>
+        <div id="total_price_output"></div>
       </div>
     </div>
   </div>
@@ -152,6 +157,49 @@
       links.style.display = (links.style.display === 'none') ? 'flex':'none';
       links.style.flexDirection = 'column';
     }
+    let submit = document.getElementById('submit');
+    let getQuote = document.getElementById('getquote');
+    let gallons = document.getElementById('gallons');
+    let date = document.getElementById('date');
+    let form = document.querySelector('form');
+    let deliv_addr_output = document.getElementById('deliv_address_output');
+    let suggested_price_output = document.getElementById('suggested_price_output');
+    let total_price_output = document.getElementById('total_price_output');
+    // form.onsubmit = (e) => e.preventDefault();
+
+    function submitToDB(e) {
+      e.preventDefault();
+      fetch('/fuelQuote/fuelQuoteForm', {
+        method: 'POST',
+        body: JSON.stringify({
+          gallons: Number(gallons.value),
+          date: date.value
+        })
+      }).then(async (res) => {
+        
+      }).catch(e => console.error(e));
+    }
+
+    function getPrice(e) {
+      e.preventDefault();
+      fetch('/pricing/getPrice/', {
+        method: 'POST',
+        body: JSON.stringify({
+          gallons: Number(gallons.value),
+          date: date.value
+        })
+      }).then(async (res) => {
+        let info = await res.json();
+        let suggested_price = info.suggested_price;
+        let total_price = info.total_price;
+        suggested_price_output.innerText = suggested_price;
+        total_price_output.innerText = total_price;
+        let personal_info = info.personal_info;
+        deliv_addr_output.innerText = `${personal_info.address1}, ${personal_info.city}, ${personal_info.state}, ${personal_info.zipcode}`;
+      })
+    }
+    submit.onclick = submitToDB;
+    getQuote.onclick = getPrice;
   </script>
 </body>
 </html>
