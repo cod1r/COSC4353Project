@@ -1,173 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Personal Profile</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/main.css">
-	</head>
-	<body>
-  	<style>
+  <head>
+    <title>Personal Profile</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <style>
+      .containerForm {
+        background-color: white;
+        font-family: "Times New Roman", Times, serif;
+        border-radius: 5px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 50%;
+        padding: 10px;
+        margin: 0;
+        transform: translateX(50%) translateY(25%);
+      }
 
-			.containerForm {
-				background-color: white;
-				font-family: 'Times New Roman', Times, serif;
-				border-radius: 5px;
-				display: none;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
-				width: 50%;
-				padding: 10px;
-				margin: 0;
-				transform: translateX(50%) translateY(25%);
-			}
+      .form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        text-align: center;
+        overflow-y: hidden;
+        overflow-x: hidden;
+      }
 
-			.form {
-				width: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: space-evenly;
-				flex-direction: column;
-				text-align: center;
-				overflow-y: hidden;
-				overflow-x: hidden;
-			}
+      input {
+        outline: solid black 2px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        transition: outline-offset 0.2s linear;
+        width: 50%;
+      }
 
-			input {
-				outline: solid black 2px;
-				border: none;
-				border-radius: 5px;
-				padding: 10px;
-				transition: outline-offset .2s linear;
-				width: 50%;
-			}
+      input:focus {
+        outline-offset: 3px;
+      }
 
-			input:focus {
-				outline-offset: 3px;
-			}
+      label {
+        font-size: large;
+        font-weight: 600;
+        width: 100%;
+        margin: 5px;
+      }
 
-			label {
-				font-size: large;
-				font-weight: 600;
-				width: 100%;
-				margin: 5px;
-			}
+      button {
+        padding: 10px;
+        background: #57b846;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: background 0.4s;
+        width: 50%;
+      }
 
-			button {
-				padding: 10px;
-				background: #57b846;
-				font-size: 15px;
-				border: none;
-				border-radius: 5px;
-				color: white;
-				cursor: pointer;
-				border-radius: 25px;
-				transition: background .4s;
-				width: 50%;
-			}
+      button:hover {
+        background: #333333;
+      }
 
-			button:hover {
-				background: #333333;
-			}
+      ::placeholder {
+        color: #4158d0;
+      }
 
-			::placeholder {
-				color: #4158d0;
-			}
+      .force-opaque::placeholder {
+        opacity: 1;
+      }
 
-			.force-opaque::placeholder {
-				opacity: 1;
-			}
+      label > div {
+        margin: 5px;
+      }
 
-			label > div {
-				margin: 5px;
-			}
-			
-			header {
-				font-size: larger;
-				color: #c850c0;
-			}
+      header {
+        font-size: larger;
+        color: #c850c0;
+      }
 
-			.containerProfile {
-				border-radius: 5px;
-				width: 50%;
-				height: 50%;
-				display: flex;
-				transform: translateX(50%) translateY(50%);
-				background-color: white;
-				flex-direction: column;
-				justify-content: space-evenly;
-				align-items: center;
-			}
+      .containerProfile {
+        border-radius: 5px;
+        width: 50%;
+        height: 50%;
+        display: flex;
+        transform: translateX(50%) translateY(50%);
+        background-color: white;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
 
-			.userInfoContainer {
-				display: flex;
-				width: 50%;
-				justify-content: space-between;
-			}
+      .userInfoContainer {
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+      }
 
-			@media (max-width: 750px) {
-				.containerProfile, .containerForm {
-					width: 100%;
-					transform: none;
-				}
+      @media (max-width: 750px) {
+        .containerProfile,
+        .containerForm {
+          width: 100%;
+          transform: none;
+        }
 
-				input, .userInfoContainer {
-					width: 80%;
-				}
-			}
-		</style>
-  <div class="navbar">
-    <div class="navLink">
-      <a href="profile.html">Profile</a>
+        input,
+        .userInfoContainer {
+          width: 80%;
+        }
+      }
+    </style>
+    <div class="navbar">
+      <div class="navLink">
+        <a href="profile.html">Profile</a>
+      </div>
+      <div class="navLink">
+        <a href="quoteHistory.html">Quote History</a>
+      </div>
+      <div class="navLink">
+        <a href="fuelQuoteForm.html">Fuel Quote Form</a>
+      </div>
     </div>
-    <div class="navLink">
-      <a href="quoteHistory.html">Quote History</a>
+    <div class="responsive-nav">
+      <button>Links</button>
+      <div>
+        <a href="profile.html">Profile</a>
+        <a href="quoteHistory.html">Quote history</a>
+        <a href="fuelQuoteForm.html">Fuel Quote Form</a>
+      </div>
     </div>
-    <div class="navLink">
-      <a href="fuelQuoteForm.html">Fuel Quote Form</a>
+    <div title="User Profile" class="containerProfile">
+      <header>
+        <b>Personal Profile Information</b>
+      </header>
+      <div class="userInfoContainer">
+        <div>Full Name:</div>
+        <div id="FullName"></div>
+      </div>
+      <div class="userInfoContainer">
+        <div>Address 1:</div>
+        <div id="Address1"></div>
+      </div>
+      <div class="userInfoContainer">
+        <div>Address 2:</div>
+        <div id="Address2"></div>
+      </div>
+      <div class="userInfoContainer">
+        <div>City:</div>
+        <div id="City"></div>
+      </div>
+      <div class="userInfoContainer">
+        <div>State:</div>
+        <div id="State"></div>
+      </div>
+      <div class="userInfoContainer">
+        <div>Zipcode:</div>
+        <div id="Zipcode"></div>
+      </div>
+      <button onclick="switchContainer()">Edit Information</button>
     </div>
-  </div>
-  <div class="responsive-nav">
-    <button>Links</button>
-    <div>
-      <a href="profile.html">Profile</a>
-      <a href="quoteHistory.html">Quote history</a>
-      <a href="fuelQuoteForm.html">Fuel Quote Form</a>
-    </div>
-  </div>
-		<div title="User Profile" class="containerProfile">
-			<header>
-				<b>Personal Profile Information</b> 
-			</header>
-			<div class="userInfoContainer">
-				<div>Full Name:</div>
-				<div id="FullName"></div>
-			</div>
-			<div class="userInfoContainer">
-				<div>Address 1:</div>
-				<div id="Address1"></div>
-			</div>
-			<div class="userInfoContainer">
-				<div>Address 2:</div>
-				<div id="Address2"></div>
-			</div>
-			<div class="userInfoContainer">
-				<div>City:</div>
-				<div id="City"></div>
-			</div>
-			<div class="userInfoContainer">
-				<div>State:</div>
-				<div id="State"></div>
-			</div>
-			<div class="userInfoContainer">
-				<div>Zipcode:</div>
-				<div id="Zipcode"></div>
-			</div>
-			<button onclick="switchContainer()">Edit Information</button>
-		</div>
-		<div class="containerForm">
-			<!-- 
+    <div class="containerForm">
+      <!-- 
 			- Full Name (50 characters, required)
 			- Address 1 (100 characters, required)
 			- Address 2 (100 characters, optional)
@@ -175,124 +176,158 @@
 			- State (Drop Down, selection required) DB will store 2 character state code
 			- Zipcode (9 characters, at least 5 character code required)
 			-->
-			<form class="form" action="profile/changeProfile" method="POST">
-				<header>
-					<b>Change your Personal Profile</b> 
-				</header>
-				<label for="name" >
-					<div>Full Name</div> 
-					<input type="text" name="name" placeholder="Full Name" class="force-opaque" maxlength="50" required/>
-				</label>
-				<label for="Address1">
-					<div>Address 1</div> 
-					<input type="text" name="Address1" placeholder="Address" class="force-opaque" maxlength="100" required/>
-				</label>
-				<label for="Address2">
-					<div>Address 2</div> 
-					<input type="text" name="Address2" placeholder=" Address(optional)" class="force-opaque" maxlength="100"/>
-				</label>
-				<label for="City">
-					<div>City</div>
-					<input type="text" name="City" placeholder="City" class="force-opaque" maxlength="100" required/>
-				</label>
-				<label for="State">
-					<div>State</div>
-					<select name="State" id="State" required>
-						<option value="" disabled selected>Select State</option>
-						<option value="AL">AL</option>
-						<option value="AK">AK</option>
-						<option value="AZ">AZ</option>
-						<option value="AR">AR</option>
-						<option value="CA">CA</option>
-						<option value="CO">CO</option>
-						<option value="CT">CT</option>
-						<option value="DE">DE</option>
-						<option value="FL">FL</option>
-						<option value="GA">GA</option>
-						<option value="HI">HI</option>
-						<option value="ID">ID</option>
-						<option value="IL">IL</option>
-						<option value="IN">IN</option>
-						<option value="IA">IA</option>
-						<option value="KS">KS</option>
-						<option value="KY">KY</option>
-						<option value="LA">LA</option>
-						<option value="ME">ME</option>
-						<option value="MD">MD</option>
-						<option value="MA">MA</option>
-						<option value="MI">MI</option>
-						<option value="MN">MN</option>
-						<option value="MS">MS</option>
-						<option value="MO">MO</option>
-						<option value="MT">MT</option>
-						<option value="NE">NE</option>
-						<option value="NV">NV</option>
-						<option value="NH">NH</option>
-						<option value="NJ">NJ</option>
-						<option value="NM">NM</option>
-						<option value="NY">NY</option>
-						<option value="NC">NC</option>
-						<option value="ND">ND</option>
-						<option value="OH">OH</option>
-						<option value="OK">OK</option>
-						<option value="OR">OR</option>
-						<option value="PA">PA</option>
-						<option value="RI">RI</option>
-						<option value="SC">SC</option>
-						<option value="SD">SD</option>
-						<option value="TN">TN</option>
-						<option value="TX">TX</option>
-						<option value="UT">UT</option>
-						<option value="VT">VT</option>
-						<option value="VA">VA</option>
-						<option value="WA">WA</option>
-						<option value="WV">WV</option>
-						<option value="WI">WI</option>
-						<option value="WY">WY</option>
-					</select>
-				</label>
-				<label for="Zipcode" style="margin-bottom: 20px;">
-					<div>Zipcode</div>
-					<input type="number" name="Zipcode" placeholder="Zipcode" class="force-opaque" minlength="5" maxlength="9" required/>
-				</label>
-				<button type="submit">SUBMIT</button>
-			</form>
-			<button onclick="switchContainer()">Cancel</button>
-		</div>
-	</body>
-	<script>
-		function switchContainer(e) {
-			let containerForm = document.querySelector('.containerForm');
-			let containerProfile = document.querySelector('.containerProfile');
+      <form class="form" action="profile/changeProfile" method="POST">
+        <header>
+          <b>Change your Personal Profile</b>
+        </header>
+        <label for="name">
+          <div>Full Name</div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            class="force-opaque"
+            maxlength="50"
+            required
+          />
+        </label>
+        <label for="Address1">
+          <div>Address 1</div>
+          <input
+            type="text"
+            name="Address1"
+            placeholder="Address"
+            class="force-opaque"
+            maxlength="100"
+            required
+          />
+        </label>
+        <label for="Address2">
+          <div>Address 2</div>
+          <input
+            type="text"
+            name="Address2"
+            placeholder=" Address(optional)"
+            class="force-opaque"
+            maxlength="100"
+          />
+        </label>
+        <label for="City">
+          <div>City</div>
+          <input
+            type="text"
+            name="City"
+            placeholder="City"
+            class="force-opaque"
+            maxlength="100"
+            required
+          />
+        </label>
+        <label for="State">
+          <div>State</div>
+          <select name="State" id="State" required>
+            <option value="" disabled selected>Select State</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AZ">AZ</option>
+            <option value="AR">AR</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="IA">IA</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="ME">ME</option>
+            <option value="MD">MD</option>
+            <option value="MA">MA</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MS">MS</option>
+            <option value="MO">MO</option>
+            <option value="MT">MT</option>
+            <option value="NE">NE</option>
+            <option value="NV">NV</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NY">NY</option>
+            <option value="NC">NC</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WV">WV</option>
+            <option value="WI">WI</option>
+            <option value="WY">WY</option>
+          </select>
+        </label>
+        <label for="Zipcode" style="margin-bottom: 20px">
+          <div>Zipcode</div>
+          <input
+            type="number"
+            name="Zipcode"
+            placeholder="Zipcode"
+            class="force-opaque"
+            minlength="5"
+            maxlength="9"
+            required
+          />
+        </label>
+        <button type="submit">SUBMIT</button>
+      </form>
+      <button onclick="switchContainer()">Cancel</button>
+    </div>
+  </body>
+  <script>
+    function switchContainer(e) {
+      let containerForm = document.querySelector(".containerForm");
+      let containerProfile = document.querySelector(".containerProfile");
 
-			if (containerForm.style.display === 'flex') {
-				containerForm.style.display = 'none';
-				containerProfile.style.display = 'flex';
-			}
-			else {
-				containerForm.style.display = 'flex';
-				containerProfile.style.display = 'none';
-			}
-		}
-
-		fetch('/profile/', {
-			method: 'GET'
-		}).then(async (res) => {
-			let personalInfo = await res.json();
-			console.log(personalInfo);
-			document.querySelector('#FullName').innerText = personalInfo.FullName;
-			document.querySelector('#Address1').innerText = personalInfo.Address1;
-			document.querySelector('#Address2').innerText = personalInfo.Address2;
-			document.querySelector('#City').innerText = personalInfo.City;
-			document.querySelector('#State').innerText = personalInfo.State;
-			document.querySelector('#Zipcode').innerText = personalInfo.Zipcode;
-		});
-
-    let responsiveButton = document.querySelector('.responsive-nav > button');
-    responsiveButton.onclick = function () {
-      let links = document.querySelector('.responsive-nav > div');
-      links.style.display = (links.style.display === 'none') ? 'flex':'none';
-      links.style.flexDirection = 'column';
+      if (containerForm.style.display === "flex") {
+        containerForm.style.display = "none";
+        containerProfile.style.display = "flex";
+      } else {
+        containerForm.style.display = "flex";
+        containerProfile.style.display = "none";
+      }
     }
-	</script>
+
+    fetch("/profile/", {
+      method: "GET",
+    }).then(async (res) => {
+      let personalInfo = await res.json();
+      console.log(personalInfo);
+      document.querySelector("#FullName").innerText = personalInfo.FullName;
+      document.querySelector("#Address1").innerText = personalInfo.Address1;
+      document.querySelector("#Address2").innerText = personalInfo.Address2;
+      document.querySelector("#City").innerText = personalInfo.City;
+      document.querySelector("#State").innerText = personalInfo.State;
+      document.querySelector("#Zipcode").innerText = personalInfo.Zipcode;
+    });
+
+    let responsiveButton = document.querySelector(".responsive-nav > button");
+    responsiveButton.onclick = function () {
+      let links = document.querySelector(".responsive-nav > div");
+      links.style.display = links.style.display === "none" ? "flex" : "none";
+      links.style.flexDirection = "column";
+    };
+  </script>
 </html>
