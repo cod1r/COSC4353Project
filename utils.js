@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 // Utility Functions (Ex: functions that check for length etc)
 
 function checkUsernameCharacters(input) {
@@ -10,19 +10,35 @@ function checkPasswordCharacters(input) {
 }
 
 function checkRegisterInput(username, password) {
-  return [...username].length >= 5 && [...username].length <= 20 && [...password].length >= 8;
+  return (
+    [...username].length >= 5 &&
+    [...username].length <= 20 &&
+    [...password].length >= 8
+  );
 }
 
 function checkLoginInput(username, password) {
-  return [...username].length >= 5 && [...username].length <= 20 && [...password].length >= 8;
+  return (
+    [...username].length >= 5 &&
+    [...username].length <= 20 &&
+    [...password].length >= 8
+  );
 }
 
 function checkProfileInput(fullname, address1, city, state, zipcode) {
-  return [...fullname].length > 0 && [...fullname].length <= 50 && [...address1].length <= 100 && [...city].length <= 100 && [...state].length == 2 && [...zipcode].length >= 5 && [...zipcode].length <= 9;
+  return (
+    [...fullname].length > 0 &&
+    [...fullname].length <= 50 &&
+    [...address1].length <= 100 &&
+    [...city].length <= 100 &&
+    [...state].length == 2 &&
+    [...zipcode].length >= 5 &&
+    [...zipcode].length <= 9
+  );
 }
 
 function checkFuelQuoteFormInput(gallons, deliveryDate) {
-  return gallons > 0 && (new Date(deliveryDate).toString()) !== 'Invalid Date';
+  return gallons > 0 && new Date(deliveryDate).toString() !== "Invalid Date";
 }
 
 function verifyToken(token) {
@@ -35,7 +51,16 @@ function verifyToken(token) {
 }
 
 function isNumber(input) {
-  return !(Number.isNaN(Number(input)));
+  return !Number.isNaN(Number(input));
+}
+
+function calcPrice(lf, rh, grf, NumberOfGallons) {
+  const GallonPrice = 1.5;
+  const CompanyProfit = 0.1;
+  let margin = GallonPrice * (lf - rh + grf + CompanyProfit);
+  let suggested_price = GallonPrice + margin;
+  let total_price = suggested_price * NumberOfGallons;
+  return [suggested_price, total_price];
 }
 
 exports.checkRegisterInput = checkRegisterInput;
@@ -46,3 +71,4 @@ exports.isNumber = isNumber;
 exports.checkUsernameCharacters = checkUsernameCharacters;
 exports.checkPasswordCharacters = checkPasswordCharacters;
 exports.verifyToken = verifyToken;
+exports.calcPrice = calcPrice;

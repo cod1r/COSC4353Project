@@ -1,157 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Fuel Quote Form</title>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-  <style>
-    .containerForm {
-      width: 50%;
-      transform: translateX(50%) translateY(50%);
-      background-color: white;
-      font-family: sans-serif;
-      border-radius: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 20px;
-      margin: 0;
-    }
-
-    .formQuote {
-      width: 75%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      flex-direction: column;
-    }
-    
-    .outputContainer {
-      min-width: min-content;
-    }
-
-    .output {
-      padding: 20px;
-      margin: 10px;
-      font-size: large;
-      font-weight: 600;
-      border-bottom: solid 1px black;
-    }
-
-    input {
-      outline: solid black 2px;
-      border: none;
-      border-radius: 5px;
-      padding: 10px;
-      transition: outline-offset .2s linear;
-      width: 50%;
-      margin: 10px;
-    }
-
-    input:focus {
-      outline-offset: 3px;
-    }
-
-    label {
-      font-size: large;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    button {
-      padding: 10px;
-      background: #57b846;
-      font-size: 15px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      border-radius: 25px;
-      transition: background .4s;
-      width: 50%;
-      margin: 10px;
-    }
-    button:hover {
-      background: #333333;
-    }
-
-
-
-    @media (max-width: 900px) {
-      .containerForm, .formQuote, input {
-        width: 100%;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+  <head>
+    <title>Fuel Quote Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <style>
       .containerForm {
-        transform: none;
-        width: 80%;
+        width: 50%;
+        transform: translateX(50%) translateY(50%);
+        background-color: white;
+        font-family: sans-serif;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        margin: 0;
       }
-    }
-  </style>
-  <div class="navbar">
-    <div class="navLink">
-      <a href="profile.html">profile</a>
+
+      .formQuote {
+        width: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+
+      .outputContainer {
+        min-width: min-content;
+      }
+
+      .output {
+        padding: 20px;
+        margin: 10px;
+        font-size: large;
+        font-weight: 600;
+        border-bottom: solid 1px black;
+      }
+
+      input {
+        outline: solid black 2px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        transition: outline-offset 0.2s linear;
+        width: 50%;
+        margin: 10px;
+      }
+
+      input:focus {
+        outline-offset: 3px;
+      }
+
+      label {
+        font-size: large;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px;
+        background: #333333;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: background 0.4s;
+        width: 50%;
+        margin: 10px;
+      }
+      /*button:hover {
+        background: #333333;
+      }*/
+
+      @media (max-width: 900px) {
+        .containerForm,
+        .formQuote,
+        input {
+          width: 100%;
+        }
+        body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .containerForm {
+          transform: none;
+          width: 80%;
+        }
+      }
+    </style>
+    <div class="navbar">
+      <div class="navLink">
+        <a href="profile.html">profile</a>
+      </div>
+      <div class="navLink">
+        <a href="quoteHistory.html">quote history</a>
+      </div>
+      <div class="navLink">
+        <a href="fuelQuoteForm.html">fuel quote form</a>
+      </div>
     </div>
-    <div class="navLink">
-      <a href="quoteHistory.html">quote history</a>
+    <div class="responsive-nav">
+      <button>Links</button>
+      <div>
+        <a href="profile.html">profile</a>
+        <a href="quoteHistory.html">quote history</a>
+        <a href="fuelQuoteForm.html">fuel quote form</a>
+      </div>
     </div>
-    <div class="navLink">
-      <a href="fuelQuoteForm.html">fuel quote form</a>
-    </div>
-  </div>
-  <div class="responsive-nav">
-    <button>Links</button>
-    <div>
-      <a href="profile.html">profile</a>
-      <a href="quoteHistory.html">quote history</a>
-      <a href="fuelQuoteForm.html">fuel quote form</a>
-    </div>
-  </div>
-  <div class="containerForm">
-    <!-- 
+    <div class="containerForm">
+      <!-- 
     - Gallons Requested (numeric, required)
     - Delivery Address (Non-editable, comes from client profile)
     - Delivery Date (Calender, date picker)
     - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
     - Total Amount Due (numeric non-editable, calculated (gallons * price)) 
     -->
-    <form action="/fuelQuote/fuelQuoteForm" class="formQuote" method="post">
-      <label for="gallons">
-        Gallons Requested
-      </label>
-      <input type="number" name="gallons" placeholder="Gallons Requested" required/>
-      <label for="date">
-        Choose your delivery date
-      </label>
-      <input type="date" name="date" placeholder="Delivery date" required/>
-      <button type="submit">SUBMIT</button>
-    </form>
-    <div class="outputContainer">
-      <div class="output">
-        <div>Delivery Address</div> 
-        <div></div>
-      </div>
-      <div class="output">
-        <div>Suggested Price</div>
-        <div></div>
+      <form action="/fuelQuote/fuelQuoteForm" class="formQuote" method="post">
+        <label for="gallons"> Gallons Requested </label>
+        <input
+          id="gallons"
+          type="number"
+          name="gallons"
+          placeholder="Gallons Requested"
+          required
+        />
+        <label for="date"> Choose your delivery date </label>
+        <input
+          id="date"
+          type="date"
+          name="date"
+          placeholder="Delivery date"
+          required
+        />
+        <button id="getquote">GET QUOTE</button>
+        <button id="submit" type="submit">SUBMIT</button>
+      </form>
+      <div class="outputContainer">
+        <div class="output">
+          <div>Delivery Address</div>
+          <div id="deliv_address_output"></div>
+        </div>
+        <div class="output">
+          <div>Suggested Price</div>
+          <div id="suggested_price_output"></div>
+        </div>
+        <div class="output">
+          <div>Total</div>
+          <div id="total_price_output"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    let responsiveButton = document.querySelector('.responsive-nav > button');
-    responsiveButton.onclick = function () {
-      let links = document.querySelector('.responsive-nav > div');
-      links.style.display = (links.style.display === 'none') ? 'flex':'none';
-      links.style.flexDirection = 'column';
-    }
-  </script>
-</body>
+    <script>
+      let responsiveButton = document.querySelector(".responsive-nav > button");
+      responsiveButton.onclick = function () {
+        let links = document.querySelector(".responsive-nav > div");
+        links.style.display = links.style.display === "none" ? "flex" : "none";
+        links.style.flexDirection = "column";
+      };
+      let submit = document.getElementById("submit");
+      let getQuote = document.getElementById("getquote");
+      submit.disabled = true;
+      getQuote.disabled = true;
+      let gallons = document.getElementById("gallons");
+      let date = document.getElementById("date");
+      gallons.onchange = (e)=> {
+        if (gallons.value.length > 0 && date.value.length > 0) {
+          submit.disabled = false;
+          getQuote.disabled = false;
+          submit.style.background = "#57b846";
+          getQuote.style.background = "#57b846";
+        } else {
+          submit.style.background = "#333333";
+          getQuote.style.background = "#333333";
+        }
+      }
+      date.onchange = (e) => {
+        if (gallons.value.length > 0 && date.value.length > 0) {
+          submit.disabled = false;
+          getQuote.disabled = false;
+          submit.style.background = "#57b846";
+          getQuote.style.background = "#57b846";
+        } else {
+          submit.style.background = "#333333";
+          getQuote.style.background = "#333333";
+        }
+      }
+      let form = document.querySelector("form");
+      let deliv_addr_output = document.getElementById("deliv_address_output");
+      let suggested_price_output = document.getElementById(
+        "suggested_price_output"
+      );
+      let total_price_output = document.getElementById("total_price_output");
+      // form.onsubmit = (e) => e.preventDefault();
+
+      function submitToDB(e) {
+        e.preventDefault();
+        fetch("/fuelQuote/fuelQuoteForm", {
+          method: "POST",
+          body: JSON.stringify({
+            gallons: Number(gallons.value),
+            date: date.value,
+          }),
+        })
+          .then(async (res) => {
+            if (res.ok) {
+              window.location = res.url;
+            }
+          })
+          .catch((e) => console.error(e));
+      }
+
+      function getPrice(e) {
+        e.preventDefault();
+        fetch("/pricing/getPrice/", {
+          method: "POST",
+          body: JSON.stringify({
+            gallons: Number(gallons.value),
+            date: date.value,
+          }),
+        }).then(async (res) => {
+          let info = await res.json();
+          let suggested_price = info.suggested_price;
+          let total_price = info.total_price;
+          suggested_price_output.innerText = suggested_price;
+          total_price_output.innerText = total_price;
+          let personal_info = info.personal_info;
+          deliv_addr_output.innerText = `${personal_info.address1}, ${personal_info.city}, ${personal_info.state}, ${personal_info.zipcode}`;
+        });
+      }
+      submit.onclick = submitToDB;
+      getQuote.onclick = getPrice;
+    </script>
+  </body>
 </html>
