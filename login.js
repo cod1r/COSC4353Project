@@ -11,6 +11,7 @@ const {
 } = require("./utils.js");
 
 login.post("/", (req, res) => {
+  console.log("body", req.body);
   if (
     req.body.Username &&
     req.body.pass &&
@@ -32,20 +33,31 @@ login.post("/", (req, res) => {
             req.body.pass,
             results[0].password,
             function (err, result) {
+              if (err) {
+                console.error(err);
+                res.status(500).end();
+                return;
+              }
               if (result) {
                 if (!req.cookies?.token) {
                   jwt.sign(
                     { name: req.body.Username },
                     process.env.secret,
-                    function (err, token) {
+                    function (err1, token) {
+                      if (err1) {
+                        console.error(err);
+                        res.status(500).end();
+                        return;
+                      }
                       res.cookie("token", token, {
                         expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
                         httpOnly: true,
                       });
+                      console.log("TOKEN", token);
+                      res.redirect("/profile.html");
                     }
                   );
                 }
-                res.redirect("/profile.html");
               } else {
                 res.status(401).json({
                   error: "WRONG USER INPUT",

@@ -54,6 +54,15 @@ function isNumber(input) {
   return !Number.isNaN(Number(input));
 }
 
+function calcPrice(lf, rh, grf, NumberOfGallons) {
+  const GallonPrice = 1.5;
+  const CompanyProfit = 0.1;
+  let margin = GallonPrice * (lf - rh + grf + CompanyProfit);
+  let suggested_price = GallonPrice + margin;
+  let total_price = suggested_price * NumberOfGallons;
+  return [suggested_price, total_price];
+}
+
 exports.checkRegisterInput = checkRegisterInput;
 exports.checkLoginInput = checkLoginInput;
 exports.checkProfileInput = checkProfileInput;
@@ -62,3 +71,4 @@ exports.isNumber = isNumber;
 exports.checkUsernameCharacters = checkUsernameCharacters;
 exports.checkPasswordCharacters = checkPasswordCharacters;
 exports.verifyToken = verifyToken;
+exports.calcPrice = calcPrice;

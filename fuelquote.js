@@ -7,6 +7,7 @@ const {
   checkFuelQuoteFormInput,
   isNumber,
   verifyToken,
+  calcPrice,
 } = require("./utils.js");
 
 fuelQuote.use(cookieParser());
@@ -24,22 +25,82 @@ fuelQuote.post("/fuelQuoteForm", (req, res) => {
     if (req.cookies?.token) {
       let decoded = verifyToken(req.cookies.token);
       if (decoded) {
+        // checks if in texas or not (Location factor based on client's address)
         connection.query(
-          `
-        INSERT INTO FuelQuote (quote_date, username, gallons_requested, delivery_address, delivery_date, suggested_price_per_gallon, total_amount_due)
-        VALUES (?, ?, ?, (SELECT address1 FROM ClientInformation WHERE username = ?), ?, 42069, 42690)`,
-          [formattedDate, decoded.name, body.gallons, decoded.name, body.date],
-          function (error, results, fields) {
-            if (error) {
-              console.error(error);
+          `SELECT * FROM ClientInformation WHERE username = ?;`,
+          [user.name],
+          function (error1, results1, fields) {
+            if (error1) {
+              console.error(error1);
               res.status(500).end();
               return;
             }
-            if (results.rowCount == 0) {
-              console.log(results.rowCount);
-              return;
-            }
-            res.status(200).redirect("/fuelQuoteForm.html");
+            // checks if there is any history (Rate History factor of Fuel Quote history)
+            connection.query(
+              `SELECT * FROM FuelQuote WHERE username = ?;`,
+              [user.name],
+              function (error2, results2, fields2) {
+                if (error2) {
+                  console.error(error2);
+                  res.status(500).end();
+                  return;
+                }
+                let LocationFactor = 0;
+                let GallonsRF = 0;
+                let RateHistory = 0;
+
+                if (results1[0].state === "TX") {
+                  LocationFactor = 0.02;
+                } else {
+                  LocationFactor = 0.04;
+                }
+
+                if (results2.length > 0) {
+                  RateHistory = 0.01;
+                } else {
+                  RateHistory = 0.0;
+                }
+
+                if (gallons >= 1000) {
+                  GallonsRF = 0.02;
+                } else {
+                  GallonsRF = 0.03;
+                }
+
+                let price_info = calcPrice(
+                  LocationFactor,
+                  RateHistory,
+                  GallonsRF,
+                  gallons
+                );
+                connection.query(
+                  `
+                    INSERT INTO FuelQuote (quote_date, username, gallons_requested, delivery_address, delivery_date, suggested_price_per_gallon, total_amount_due)
+                    VALUES (?, ?, ?, (SELECT address1 FROM ClientInformation WHERE username = ?), ?, ?, ?)`,
+                  [
+                    formattedDate,
+                    decoded.name,
+                    body.gallons,
+                    decoded.name,
+                    body.date,
+                    price_info[0],
+                    price_info[1],
+                  ],
+                  function (error, results, fields) {
+                    if (error) {
+                      console.error(error);
+                      res.status(500).end();
+                      return;
+                    }
+                    if (results.rowCount == 0) {
+                      console.log(results.rowCount);
+                      return;
+                    }
+                    res.status(200).redirect("/fuelQuoteForm.html");
+                  }
+                );
+              }
+            );
           }
         );
       }

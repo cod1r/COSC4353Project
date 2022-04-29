@@ -17,7 +17,7 @@ profile.post("/changeProfile", (req, res) => {
       req.body.Zipcode
     )
   ) {
-    let decoded = verifyToken(req.cookies.token);
+    let decoded = verifyToken(req.cookies?.token);
     if (decoded) {
       connection.query(
         `
@@ -48,6 +48,8 @@ profile.post("/changeProfile", (req, res) => {
           res.status(200).end();
         }
       );
+    } else {
+      res.status(404).end();
     }
   }
 });
@@ -60,7 +62,11 @@ profile.get("/", (req, res) => {
         `SELECT * FROM ClientInformation WHERE username = ?;`,
         [decoded.name],
         function (error, results, fields) {
-          if (error) throw error;
+          if (error) {
+            console.error(error);
+            res.status(500).end();
+            return;
+          }
           res.status(200).json({
             FullName: results[0].full_name,
             Address1: results[0].address1,
@@ -74,7 +80,8 @@ profile.get("/", (req, res) => {
     } else {
       res.status(401).end();
     }
+  } else {
+    res.status(401).end();
   }
 });
-
 module.exports = profile;

@@ -1,23 +1,9 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const { verifyToken } = require("./utils.js");
+const { verifyToken, calcPrice } = require("./utils.js");
 const connection = require("./creds.js");
 const pricing = express();
 pricing.use(cookieParser());
-
-const GallonPrice = 1.5;
-const CompanyProfit = 0.1;
-
-// Current  Price = 1.5 * NumGallons;
-// Margin =  Current Price * (Location Factor - Rate History Factor + Gallons Requested Factor + Company Profit Factor)
-
-// Total Price = CurrentPrice + Margin;
-function calcPrice(lf, rh, grf, NumberOfGallons) {
-  let margin = GallonPrice * (lf - rh + grf + CompanyProfit);
-  let suggested_price = GallonPrice + margin;
-  let total_price = suggested_price * NumberOfGallons;
-  return [suggested_price, total_price];
-}
 
 pricing.post("/getPrice", (req, res) => {
   let user = verifyToken(req.cookies?.token);
