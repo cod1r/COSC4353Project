@@ -64,7 +64,7 @@
 
       button {
         padding: 10px;
-        background: #57b846;
+        background: #333333;
         font-size: 15px;
         border: none;
         border-radius: 5px;
@@ -75,9 +75,9 @@
         width: 50%;
         margin: 10px;
       }
-      button:hover {
+      /*button:hover {
         background: #333333;
-      }
+      }*/
 
       @media (max-width: 900px) {
         .containerForm,
@@ -167,8 +167,32 @@
       };
       let submit = document.getElementById("submit");
       let getQuote = document.getElementById("getquote");
+      submit.disabled = true;
+      getQuote.disabled = true;
       let gallons = document.getElementById("gallons");
       let date = document.getElementById("date");
+      gallons.onchange = (e)=> {
+        if (gallons.value.length > 0 && date.value.length > 0) {
+          submit.disabled = false;
+          getQuote.disabled = false;
+          submit.style.background = "#57b846";
+          getQuote.style.background = "#57b846";
+        } else {
+          submit.style.background = "#333333";
+          getQuote.style.background = "#333333";
+        }
+      }
+      date.onchange = (e) => {
+        if (gallons.value.length > 0 && date.value.length > 0) {
+          submit.disabled = false;
+          getQuote.disabled = false;
+          submit.style.background = "#57b846";
+          getQuote.style.background = "#57b846";
+        } else {
+          submit.style.background = "#333333";
+          getQuote.style.background = "#333333";
+        }
+      }
       let form = document.querySelector("form");
       let deliv_addr_output = document.getElementById("deliv_address_output");
       let suggested_price_output = document.getElementById(
@@ -186,7 +210,11 @@
             date: date.value,
           }),
         })
-          .then(async (res) => {})
+          .then(async (res) => {
+            if (res.ok) {
+              window.location = res.url;
+            }
+          })
           .catch((e) => console.error(e));
       }
 

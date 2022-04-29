@@ -14,6 +14,8 @@ fuelQuote.use(cookieParser());
 
 fuelQuote.post("/fuelQuoteForm", (req, res) => {
   let body = JSON.parse(req.body);
+  let gallons = body.gallons;
+  let date = body.date;
   if (
     isNumber(body.gallons) &&
     checkFuelQuoteFormInput(Number(body.gallons), body.date)
@@ -28,7 +30,7 @@ fuelQuote.post("/fuelQuoteForm", (req, res) => {
         // checks if in texas or not (Location factor based on client's address)
         connection.query(
           `SELECT * FROM ClientInformation WHERE username = ?;`,
-          [user.name],
+          [decoded.name],
           function (error1, results1, fields) {
             if (error1) {
               console.error(error1);
@@ -38,7 +40,7 @@ fuelQuote.post("/fuelQuoteForm", (req, res) => {
             // checks if there is any history (Rate History factor of Fuel Quote history)
             connection.query(
               `SELECT * FROM FuelQuote WHERE username = ?;`,
-              [user.name],
+              [decoded.name],
               function (error2, results2, fields2) {
                 if (error2) {
                   console.error(error2);
@@ -96,7 +98,7 @@ fuelQuote.post("/fuelQuoteForm", (req, res) => {
                       console.log(results.rowCount);
                       return;
                     }
-                    res.status(200).redirect("/fuelQuoteForm.html");
+                    res.status(200).redirect("/quoteHistory.html");
                   }
                 );
               }
@@ -138,7 +140,6 @@ fuelQuote.get("/", (req, res) => {
               TotalAmount: results[i].total_amount_due,
             };
           }
-          console.log(response);
           res.status(200).json(response);
         }
       );

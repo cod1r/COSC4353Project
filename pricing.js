@@ -8,6 +8,7 @@ pricing.use(cookieParser());
 pricing.post("/getPrice", (req, res) => {
   let user = verifyToken(req.cookies?.token);
   let body = JSON.parse(req.body);
+  console.log("BODY", body);
   let gallons = body.gallons;
   let date = body.date;
   // checks if in texas or not (Location factor based on client's address)
