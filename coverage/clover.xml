@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651271859394" clover="3.2.0">
-  <project timestamp="1651271859394" name="All files">
+<coverage generated="1651524663771" clover="3.2.0">
+  <project timestamp="1651524663772" name="All files">
     <metrics statements="27" coveredstatements="27" conditionals="15" coveredconditionals="15" methods="9" coveredmethods="9" elements="51" coveredelements="51" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
     <file name="utils.js" path="/Users/williamberquist/Desktop/Software Design COSC 4353/assignment 3/COSC4353Project/utils.js">
       <metrics statements="27" coveredstatements="27" conditionals="15" coveredconditionals="15" methods="9" coveredmethods="9"/>

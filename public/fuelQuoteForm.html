@@ -130,6 +130,7 @@
           type="number"
           name="gallons"
           placeholder="Gallons Requested"
+          min="1"
           required
         />
         <label for="date"> Choose your delivery date </label>
@@ -140,7 +141,7 @@
           placeholder="Delivery date"
           required
         />
-        <button id="getquote">GET QUOTE</button>
+        <button id="getquote" type="submit">GET QUOTE</button>
         <button id="submit" type="submit">SUBMIT</button>
       </form>
       <div class="outputContainer">
@@ -171,7 +172,7 @@
       getQuote.disabled = true;
       let gallons = document.getElementById("gallons");
       let date = document.getElementById("date");
-      gallons.onchange = (e)=> {
+      gallons.onchange = (e) => {
         if (gallons.value.length > 0 && date.value.length > 0) {
           submit.disabled = false;
           getQuote.disabled = false;
@@ -181,7 +182,7 @@
           submit.style.background = "#333333";
           getQuote.style.background = "#333333";
         }
-      }
+      };
       date.onchange = (e) => {
         if (gallons.value.length > 0 && date.value.length > 0) {
           submit.disabled = false;
@@ -192,17 +193,16 @@
           submit.style.background = "#333333";
           getQuote.style.background = "#333333";
         }
-      }
+      };
       let form = document.querySelector("form");
       let deliv_addr_output = document.getElementById("deliv_address_output");
       let suggested_price_output = document.getElementById(
         "suggested_price_output"
       );
-      let total_price_output = document.getElementById("total_price_output");
-      // form.onsubmit = (e) => e.preventDefault();
-
-      function submitToDB(e) {
-        e.preventDefault();
+      function submitToDB(ev) {
+        if (!form.reportValidity()) {
+          return;
+        }
         fetch("/fuelQuote/fuelQuoteForm", {
           method: "POST",
           body: JSON.stringify({
@@ -218,8 +218,10 @@
           .catch((e) => console.error(e));
       }
 
-      function getPrice(e) {
-        e.preventDefault();
+      function getPrice(ev) {
+        if (!form.reportValidity()) {
+          return;
+        }
         fetch("/pricing/getPrice/", {
           method: "POST",
           body: JSON.stringify({
@@ -238,6 +240,10 @@
       }
       submit.onclick = submitToDB;
       getQuote.onclick = getPrice;
+      let total_price_output = document.getElementById("total_price_output");
+      form.onsubmit = (e) => {
+        e.preventDefault();
+      };
     </script>
   </body>
 </html>
