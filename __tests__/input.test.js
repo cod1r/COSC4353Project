@@ -93,5 +93,7 @@ test("checkProfileInput - too long state", () => {
 });
 
 test("checkPrice - correct price", () => {
-  expect(Util.calcPrice(0.02, 0.01, .02, 10001)).toStrictEqual([1.695,16951.695]);
+  expect(Util.calcPrice(0.02, 0.01, 0.02, 10001)).toStrictEqual([
+    1.695, 16951.695,
+  ]);
 });
